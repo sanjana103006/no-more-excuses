@@ -1,0 +1,4418 @@
+
+Action: Design an Expo React Native mobile app for a premium Restaurant Management application.
+
+**original_problem_statement**: Build a complete Restaurant Management Web Application with a highly immersive, modern, and visually stunning interface. The design should feel premium, cinematic, and interactive—similar to high-end product websites with scroll-based animations.
+
+CORE FEATURES:
+1. Landing Page (Highly Visual & Animated) — Full-screen hero with animated food items (pizza slice, coffee mug, burger), parallax scrolling, floating elements, CTAs "Book Table" and "Order Now"
+2. Menu Section — food items with images, price, rating, hover/press animations (zoom, glow, tilt), add to cart, category filters (Veg, Non-Veg, Drinks, Desserts)
+3. Table Booking — date, time, number of people, real-time availability
+4. Order/Cart — dynamic cart updates, checkout with order summary, mock payment
+5. Feedback & Reviews — star rating, comments, animated testimonial carousel
+6. Auth — Google login (Emergent), user dashboard with booking + order history
+
+**user_choices**: 
+- Platform: Expo React Native mobile app
+- Auth: Emergent Google Social Login
+- Dark theme with vibrant food colors (reds, oranges, browns)
+- Glassmorphism + neumorphism elements where appropriate
+- Animations via react-native-reanimated
+- Scroll animations: pizza slice slides, coffee cup rotates with steam, staggered food cards
+- Loading animation (food being prepared) as bonus
+
+**key_functionalities**: Animated Landing Hero with food item motion, Menu Browse with Filters, Cart & Checkout flow, Table Booking, Google Auth, User Dashboard (orders + bookings history)
+
+**app_type**: mobile_web_app (Expo React Native premium mobile app, NOT a web app)
+
+Please produce /app/design_guidelines.json with color palette (dark with reds/oranges/browns), typography (NOT Inter/Roboto), spacing, component patterns (glassmorphism cards, neumorphic buttons), navigation (tab-based: Home/Menu/Cart/Bookings/Profile), and detailed animation patterns for the hero screen with pizza/coffee/burger motion. Include high-quality food image URLs for menu items and hero.
+Observation: ## Design Guidelines Complete
+  - Case type: MVP creation
+  - Defined the "Dark Culinary Art" theme with a dark/Jewel & Luxury archetype mixed with vibrant reds/oranges.
+  - Specified Playfair Display / Outfit fonts and glassmorphism UI specs tailored for React Native.
+  - Sourced premium high-quality 2D/3D images for hero food items (Pizza, Coffee, Burger).
+  - Defined `react-native-reanimated` physics, floating, and parallax details for the landing screen.
+  - Documented layout, spacing, components (bottom tab navigation, glassmorphism cards), and animations in `/app/design_guidelines.json`.
+  - Next Action Items: Main agent to bootstrap the Expo app and begin building UI components based on the defined guidelines.
+
+
+
+
+
+
+
+
+
+
+
+Action: {"type": "mcp_tool", "tool_name": "mcp_view_bulk", "tool_arguments": {"paths": ["/app/design_guidelines.json"]}}
+Observation: ===FILE: /app/design_guidelines.json
+/app/design_guidelines.json:
+1|{
+2|  "theme": "dark",
+3|  "archetype": "Archetype 5 (Jewel & Luxury) blended with warm organic culinary tones",
+4|  "core_concept": "Dark Culinary Art - A premium, cinematic, and highly interactive restaurant experience that elevates food into high-end art through deep contrast, vibrant warm accents, and fluid motion.",
+5|  "color_palette": {
+6|    "background": {
+7|      "default": "#0B0808",
+8|      "paper": "#141010",
+9|      "glass": "rgba(20, 16, 16, 0.6)"
+10|    },
+11|    "primary": {
+12|      "main": "#FF4D00",
+13|      "light": "#FF7333",
+14|      "dark": "#CC3D00",
+15|      "glow": "rgba(255, 77, 0, 0.4)"
+16|    },
+17|    "secondary": {
+18|      "main": "#D2691E",
+19|      "light": "#E08B46",
+20|      "dark": "#A65318"
+21|    },
+22|    "accent": {
+23|      "gold": "#FFB800",
+24|      "brown": "#4A3224"
+25|    },
+26|    "text": {
+27|      "primary": "#FDF8F5",
+28|      "secondary": "#A89A94",
+29|      "disabled": "#665C58"
+30|    },
+31|    "border": {
+32|      "default": "rgba(255, 255, 255, 0.08)",
+33|      "highlight": "rgba(255, 77, 0, 0.3)"
+34|    }
+35|  },
+36|  "typography": {
+37|    "primary_font": "Outfit",
+38|    "secondary_font": "Manrope",
+39|    "headings": {
+40|      "h1": { "fontFamily": "Outfit-Bold", "fontSize": 48, "letterSpacing": -1.5, "lineHeight": 56 },
+41|      "h2": { "fontFamily": "Outfit-SemiBold", "fontSize": 36, "letterSpacing": -1, "lineHeight": 42 },
+42|      "h3": { "fontFamily": "Outfit-Medium", "fontSize": 24, "letterSpacing": -0.5, "lineHeight": 32 }
+43|    },
+44|    "body": {
+45|      "large": { "fontFamily": "Manrope-Medium", "fontSize": 18, "letterSpacing": 0, "lineHeight": 28 },
+46|      "default": { "fontFamily": "Manrope-Regular", "fontSize": 16, "letterSpacing": 0.2, "lineHeight": 24 },
+47|      "small": { "fontFamily": "Manrope-Medium", "fontSize": 14, "letterSpacing": 0.5, "lineHeight": 20 }
+48|    },
+49|    "overline": { "fontFamily": "Outfit-Bold", "fontSize": 12, "letterSpacing": 2, "textTransform": "uppercase" }
+50|  },
+51|  "spacing": {
+52|    "2xs": 4,
+53|    "xs": 8,
+54|    "sm": 12,
+55|    "md": 16,
+56|    "lg": 24,
+57|    "xl": 32,
+58|    "2xl": 48,
+59|    "3xl": 64
+60|  },
+61|  "layout_patterns": {
+62|    "screen_padding": 24,
+63|    "border_radius": {
+64|      "sm": 8,
+65|      "md": 16,
+66|      "lg": 24,
+67|      "pill": 9999
+68|    }
+69|  },
+70|  "components": {
+71|    "cards": {
+72|      "style": "Glassmorphism",
+73|      "implementation": "Use Expo BlurView with tint='dark', intensity={40}. Add a 1px border of rgba(255,255,255,0.1).",
+74|      "borderRadius": 24,
+75|      "padding": 20,
+76|      "shadow": "Drop shadow of rgba(0,0,0,0.4) with radius 16 and offset Y: 8."
+77|    },
+78|    "buttons": {
+79|      "primary": {
+80|        "style": "Neumorphic / Inner Glow",
+81|        "backgroundColor": "#FF4D00",
+82|        "borderRadius": 9999,
+83|        "paddingVertical": 16,
+84|        "paddingHorizontal": 32,
+85|        "shadow": "Box shadow mimicking a glow: rgba(255, 77, 0, 0.4) offset 0,8 blur 16."
+86|      },
+87|      "secondary": {
+88|        "style": "Dark Neumorphism",
+89|        "backgroundColor": "#141010",
+90|        "borderWidth": 1,
+91|        "borderColor": "rgba(255,255,255,0.05)",
+92|        "borderRadius": 9999
+93|      }
+94|    },
+95|    "navigation": {
+96|      "type": "Bottom Tab Navigation",
+97|      "style": "Floating Glassmorphism",
+98|      "container": {
+99|        "position": "absolute",
+100|        "bottom": 32,
+101|        "left": 24,
+102|        "right": 24,
+103|        "height": 72,
+104|        "borderRadius": 36,
+105|        "backgroundColor": "rgba(11, 8, 8, 0.75)",
+106|        "overflow": "hidden"
+107|      },
+108|      "tabs": ["Home", "Menu", "Cart", "Bookings", "Profile"]
+109|    }
+110|  },
+111|  "animations": {
+112|    "engine": "react-native-reanimated",
+113|    "hero_screen": {
+114|      "scroll_parallax": "Map scrollY to translate Y of background and food items at different speeds.",
+115|      "pizza_motion": "Enters with Spring from right. Continuously floats (up/down translation) using withRepeat and withTiming. Slight rotation mapping.",
+116|      "coffee_motion": "Fades in and scales up. Steam particles scale up, reduce opacity, and translate Y upwards in a staggered loop.",
+117|      "burger_motion": "Staggered spring drop. Top bun, patty, bottom bun drop sequentially and compress slightly before settling.",
+118|      "background_elements": "Floating glowing orbs (rgba(255, 77, 0, 0.1)) moving slowly across the screen."
+119|    },
+120|    "menu_interactions": {
+121|      "card_press": "Scale down to 0.96 withSpring. Border highlights briefly.",
+122|      "add_to_cart": "Icon tilt and scale bounce. Small confetti/sparkle burst."
+123|    },
+124|    "loading": {
+125|      "type": "Sequence",
+126|      "description": "Animated SVG or Lottie of a sizzling pan or coffee dripping, with glowing accents."
+127|    }
+128|  },
+129|  "media": {
+130|    "hero_pizza": "https://images.pexels.com/photos/35017345/pexels-photo-35017345.jpeg",
+131|    "hero_burger": "https://images.pexels.com/photos/35832466/pexels-photo-35832466.jpeg",
+132|    "hero_coffee": "https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg",
+133|    "background_texture": "https://images.unsplash.com/photo-1767247609304-e2742e30671a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwyfHxkYXJrJTIwbW9vZHklMjB0ZXh0dXJlJTIwcmVkJTIwb3JhbmdlfGVufDB8fHx8MTc3NzMwMDY1OXww&ixlib=rb-4.1.0&q=85"
+134|  },
+135|  "instructions_to_main_agent": [
+136|    "Ensure all components use StyleSheet or NativeWind explicitly mapped to these guidelines.",
+137|    "Do NOT use generic components; rely on Expo BlurView for all glass panels.",
+138|    "Use react-native-reanimated for all hero animations.",
+139|    "Fonts 'Outfit' and 'Manrope' must be loaded via expo-font before rendering the app.",
+140|    "The floating tab bar must sit above the content and blur the scrollable items beneath it.",
+141|    "Apply `testID` (the React Native equivalent of `data-testid`) to all interactive elements."
+142|  ]
+143|}
+
+===END
+
+
+
+
+
+
+Now I have everything I need. Let me create the plan and start building.
+
+<Plan>
+1. **Backend (FastAPI + MongoDB)**:
+   - Auth: Emergent Google OAuth (/api/auth/session, /api/auth/me, /api/auth/logout)
+   - Menu: GET /api/menu (with category filter), seeded with sample data on startup
+   - Bookings: POST/GET /api/bookings (authenticated)
+   - Orders: POST/GET /api/orders (authenticated)
+   - Reviews: GET /api/reviews, seeded with sample testimonials
+   - Models: User, Session, MenuItem, Booking, Order, Review
+
+2. **Frontend (Expo Router)**:
+   - `app/_layout.tsx` — Root layout, AuthProvider, font loading (Outfit, Manrope), CartProvider
+   - `app/(tabs)/_layout.tsx` — Floating glassmorphism bottom tabs
+   - `app/(tabs)/index.tsx` — Animated Hero Landing (pizza slide, coffee rotate+steam, burger stagger drop)
+   - `app/(tabs)/menu.tsx` — Menu grid with category filters, add to cart
+   - `app/(tabs)/cart.tsx` — Cart, checkout flow, mock payment
+   - `app/(tabs)/bookings.tsx` — Create booking + list my bookings
+   - `app/(tabs)/profile.tsx` — Google login or user profile
+   - `app/auth-callback.tsx` — session_id processor
+   - Contexts: AuthContext, CartContext
+
+3. **Install**: expo-linear-gradient, expo-font for Outfit/Manrope
+4. **Test** via testing_agent_v3_expo
+
+Let me start:
+Action: $ cd /app/frontend && yarn add expo-linear-gradient @expo-google-fonts/outfit @expo-google-fonts/manrope 2>&1 | tail -20
+Observation: [3/4] Linking dependencies...
+warning "eslint-config-expo > @typescript-eslint/eslint-plugin@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+warning "eslint-config-expo > @typescript-eslint/parser@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+warning "eslint-config-expo > @typescript-eslint/eslint-plugin > @typescript-eslint/type-utils@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+warning "eslint-config-expo > @typescript-eslint/eslint-plugin > @typescript-eslint/utils@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+warning "eslint-config-expo > @typescript-eslint/parser > @typescript-eslint/typescript-estree@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+warning "eslint-config-expo > @typescript-eslint/parser > @typescript-eslint/typescript-estree > @typescript-eslint/project-service@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+warning "eslint-config-expo > @typescript-eslint/parser > @typescript-eslint/typescript-estree > @typescript-eslint/tsconfig-utils@8.37.0" has incorrect peer dependency "typescript@>=4.8.4 <5.9.0".
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 3 new dependencies.
+info Direct dependencies
+├─ @expo-google-fonts/manrope@0.4.2
+├─ @expo-google-fonts/outfit@0.4.3
+└─ expo-linear-gradient@55.0.13
+info All dependencies
+├─ @expo-google-fonts/manrope@0.4.2
+├─ @expo-google-fonts/outfit@0.4.3
+└─ expo-linear-gradient@55.0.13
+Done in 7.01s.
+Exit code: 0
+
+
+
+
+Now let me create the backend:
+Action: file_editor create /app/backend/server.py --file-text "\"\"\"
+Gusto & Ember — Restaurant Management Backend
+Tech: FastAPI + MongoDB + Emergent Google OAuth
+\"\"\"
+from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depends
+from fastapi.responses import JSONResponse
+from dotenv import load_dotenv
+from starlette.middleware.cors import CORSMiddleware
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+import logging
+import uuid
+import httpx
+from pathlib import Path
+from pydantic import BaseModel, Field
+from typing import List, Optional
+from datetime import datetime, timezone, timedelta
+
+
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
+
+# MongoDB connection
+mongo_url = os.environ['MONGO_URL']
+client = AsyncIOMotorClient(mongo_url)
+db = client[os.environ['DB_NAME']]
+
+app = FastAPI(title=\"Gusto & Ember API\")
+api_router = APIRouter(prefix=\"/api\")
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+# ============================================================
+# MODELS
+# ============================================================
+class User(BaseModel):
+    user_id: str
+    email: str
+    name: str
+    picture: Optional[str] = None
+    created_at: datetime
+
+
+class MenuItem(BaseModel):
+    item_id: str
+    name: str
+    description: str
+    price: float
+    rating: float
+    category: str  # veg, non-veg, drinks, desserts
+    image: str
+    tags: List[str] = []
+
+
+class BookingCreate(BaseModel):
+    date: str  # YYYY-MM-DD
+    time: str  # HH:MM
+    people: int
+    notes: Optional[str] = \"\"
+
+
+class Booking(BaseModel):
+    booking_id: str
+    user_id: str
+    user_name: str
+    date: str
+    time: str
+    people: int
+    notes: str = \"\"
+    status: str = \"confirmed\"
+    created_at: datetime
+
+
+class OrderItem(BaseModel):
+    item_id: str
+    name: str
+    price: float
+    quantity: int
+    image: str
+
+
+class OrderCreate(BaseModel):
+    items: List[OrderItem]
+    total: float
+    payment_method: str = \"card\"
+
+
+class Order(BaseModel):
+    order_id: str
+    user_id: str
+    user_name: str
+    items: List[OrderItem]
+    total: float
+    payment_method: str
+    status: str = \"preparing\"
+    created_at: datetime
+
+
+class Review(BaseModel):
+    review_id: str
+    name: str
+    rating: int
+    comment: str
+    avatar: str
+    created_at: datetime
+
+
+class ReviewCreate(BaseModel):
+    rating: int
+    comment: str
+
+
+# ============================================================
+# AUTH HELPERS
+# ============================================================
+async def get_current_user(request: Request) -> User:
+    \"\"\"Get current user from session_token cookie or Authorization header.\"\"\"
+    session_token = request.cookies.get(\"session_token\")
+    if not session_token:
+        auth_header = request.headers.get(\"Authorization\", \"\")
+        if auth_header.startswith(\"Bearer \"):
+            session_token = auth_header.replace(\"Bearer \", \"\", 1)
+
+    if not session_token:
+        raise HTTPException(status_code=401, detail=\"Not authenticated\")
+
+    session_doc = await db.user_sessions.find_one(
+        {\"session_token\": session_token}, {\"_id\": 0}
+    )
+    if not session_doc:
+        raise HTTPException(status_code=401, detail=\"Invalid session\")
+
+    expires_at = session_doc[\"expires_at\"]
+    if isinstance(expires_at, str):
+        expires_at = datetime.fromisoformat(expires_at)
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    if expires_at < datetime.now(timezone.utc):
+        raise HTTPException(status_code=401, detail=\"Session expired\")
+
+    user_doc = await db.users.find_one(
+        {\"user_id\": session_doc[\"user_id\"]}, {\"_id\": 0}
+    )
+    if not user_doc:
+        raise HTTPException(status_code=401, detail=\"User not found\")
+    return User(**user_doc)
+
+
+# ============================================================
+# AUTH ROUTES
+# ============================================================
+@api_router.post(\"/auth/session\")
+async def process_session(request: Request, response: Response):
+    \"\"\"Exchange session_id from Emergent Auth for persistent session_token.\"\"\"
+    body = await request.json()
+    session_id = body.get(\"session_id\")
+    if not session_id:
+        raise HTTPException(status_code=400, detail=\"session_id required\")
+
+    async with httpx.AsyncClient(timeout=15) as http_client:
+        auth_resp = await http_client.get(
+            \"https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data\",
+            headers={\"X-Session-ID\": session_id},
+        )
+    if auth_resp.status_code != 200:
+        raise HTTPException(status_code=401, detail=\"Invalid session_id\")
+    data = auth_resp.json()
+
+    # Upsert user
+    existing = await db.users.find_one({\"email\": data[\"email\"]}, {\"_id\": 0})
+    if existing:
+        user_id = existing[\"user_id\"]
+        await db.users.update_one(
+            {\"user_id\": user_id},
+            {\"$set\": {\"name\": data[\"name\"], \"picture\": data.get(\"picture\", \"\")}},
+        )
+    else:
+        user_id = f\"user_{uuid.uuid4().hex[:12]}\"
+        await db.users.insert_one({
+            \"user_id\": user_id,
+            \"email\": data[\"email\"],
+            \"name\": data[\"name\"],
+            \"picture\": data.get(\"picture\", \"\"),
+            \"created_at\": datetime.now(timezone.utc),
+        })
+
+    session_token = data[\"session_token\"]
+    expires_at = datetime.now(timezone.utc) + timedelta(days=7)
+    await db.user_sessions.insert_one({
+        \"user_id\": user_id,
+        \"session_token\": session_token,
+        \"expires_at\": expires_at,
+        \"created_at\": datetime.now(timezone.utc),
+    })
+
+    # Set httpOnly cookie
+    response.set_cookie(
+        key=\"session_token\",
+        value=session_token,
+        max_age=7 * 24 * 60 * 60,
+        path=\"/\",
+        httponly=True,
+        secure=True,
+        samesite=\"none\",
+    )
+
+    return {
+        \"user_id\": user_id,
+        \"email\": data[\"email\"],
+        \"name\": data[\"name\"],
+        \"picture\": data.get(\"picture\", \"\"),
+        \"session_token\": session_token,
+    }
+
+
+@api_router.get(\"/auth/me\", response_model=User)
+async def get_me(user: User = Depends(get_current_user)):
+    return user
+
+
+@api_router.post(\"/auth/logout\")
+async def logout(request: Request, response: Response):
+    session_token = request.cookies.get(\"session_token\")
+    if not session_token:
+        auth_header = request.headers.get(\"Authorization\", \"\")
+        if auth_header.startswith(\"Bearer \"):
+            session_token = auth_header.replace(\"Bearer \", \"\", 1)
+    if session_token:
+        await db.user_sessions.delete_one({\"session_token\": session_token})
+    response.delete_cookie(\"session_token\", path=\"/\")
+    return {\"ok\": True}
+
+
+# ============================================================
+# MENU ROUTES
+# ============================================================
+@api_router.get(\"/menu\", response_model=List[MenuItem])
+async def get_menu(category: Optional[str] = None):
+    query = {}
+    if category and category.lower() != \"all\":
+        query[\"category\"] = category.lower()
+    items = await db.menu_items.find(query, {\"_id\": 0}).to_list(200)
+    return [MenuItem(**i) for i in items]
+
+
+# ============================================================
+# BOOKING ROUTES
+# ============================================================
+@api_router.post(\"/bookings\", response_model=Booking)
+async def create_booking(payload: BookingCreate, user: User = Depends(get_current_user)):
+    booking = Booking(
+        booking_id=f\"bk_{uuid.uuid4().hex[:12]}\",
+        user_id=user.user_id,
+        user_name=user.name,
+        date=payload.date,
+        time=payload.time,
+        people=payload.people,
+        notes=payload.notes or \"\",
+        status=\"confirmed\",
+        created_at=datetime.now(timezone.utc),
+    )
+    await db.bookings.insert_one(booking.model_dump())
+    return booking
+
+
+@api_router.get(\"/bookings\", response_model=List[Booking])
+async def list_bookings(user: User = Depends(get_current_user)):
+    items = await db.bookings.find({\"user_id\": user.user_id}, {\"_id\": 0}).sort(\"created_at\", -1).to_list(100)
+    return [Booking(**i) for i in items]
+
+
+@api_router.get(\"/bookings/availability\")
+async def availability(date: str, time: str):
+    # Simple availability simulation: count existing bookings for a slot.
+    count = await db.bookings.count_documents({\"date\": date, \"time\": time})
+    # Assume 10 tables per slot.
+    available = max(0, 10 - count)
+    return {\"date\": date, \"time\": time, \"available_tables\": available, \"total_tables\": 10}
+
+
+# ============================================================
+# ORDER ROUTES
+# ============================================================
+@api_router.post(\"/orders\", response_model=Order)
+async def create_order(payload: OrderCreate, user: User = Depends(get_current_user)):
+    order = Order(
+        order_id=f\"ord_{uuid.uuid4().hex[:12]}\",
+        user_id=user.user_id,
+        user_name=user.name,
+        items=payload.items,
+        total=payload.total,
+        payment_method=payload.payment_method,
+        status=\"preparing\",
+        created_at=datetime.now(timezone.utc),
+    )
+    await db.orders.insert_one(order.model_dump())
+    return order
+
+
+@api_router.get(\"/orders\", response_model=List[Order])
+async def list_orders(user: User = Depends(get_current_user)):
+    items = await db.orders.find({\"user_id\": user.user_id}, {\"_id\": 0}).sort(\"created_at\", -1).to_list(100)
+    return [Order(**i) for i in items]
+
+
+# ============================================================
+# REVIEWS
+# ============================================================
+@api_router.get(\"/reviews\", response_model=List[Review])
+async def get_reviews():
+    items = await db.reviews.find({}, {\"_id\": 0}).sort(\"created_at\", -1).to_list(50)
+    return [Review(**i) for i in items]
+
+
+@api_router.post(\"/reviews\", response_model=Review)
+async def post_review(payload: ReviewCreate, user: User = Depends(get_current_user)):
+    review = Review(
+        review_id=f\"rev_{uuid.uuid4().hex[:12]}\",
+        name=user.name,
+        rating=payload.rating,
+        comment=payload.comment,
+        avatar=user.picture or \"\",
+        created_at=datetime.now(timezone.utc),
+    )
+    await db.reviews.insert_one(review.model_dump())
+    return review
+
+
+# ============================================================
+# HEALTH
+# ============================================================
+@api_router.get(\"/\")
+async def root():
+    return {\"message\": \"Gusto & Ember API\", \"status\": \"ok\"}
+
+
+# ============================================================
+# SEED
+# ============================================================
+SAMPLE_MENU = [
+    {
+        \"item_id\": \"m_pizza_01\",
+        \"name\": \"Truffle Margherita\",
+        \"description\": \"Wood-fired sourdough, buffalo mozzarella, truffle oil, fresh basil.\",
+        \"price\": 18.50,
+        \"rating\": 4.8,
+        \"category\": \"veg\",
+        \"image\": \"https://images.pexels.com/photos/35017345/pexels-photo-35017345.jpeg\",
+        \"tags\": [\"signature\", \"wood-fired\"],
+    },
+    {
+        \"item_id\": \"m_burger_01\",
+        \"name\": \"Ember Wagyu Burger\",
+        \"description\": \"Smoked wagyu, aged cheddar, charred onion jam, brioche bun.\",
+        \"price\": 24.00,
+        \"rating\": 4.9,
+        \"category\": \"non-veg\",
+        \"image\": \"https://images.pexels.com/photos/35832466/pexels-photo-35832466.jpeg\",
+        \"tags\": [\"signature\", \"smoked\"],
+    },
+    {
+        \"item_id\": \"m_coffee_01\",
+        \"name\": \"Volcano Espresso\",
+        \"description\": \"Single-origin Ethiopian espresso with velvety crema.\",
+        \"price\": 5.50,
+        \"rating\": 4.7,
+        \"category\": \"drinks\",
+        \"image\": \"https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg\",
+        \"tags\": [\"hot\", \"caffeine\"],
+    },
+    {
+        \"item_id\": \"m_pizza_02\",
+        \"name\": \"Spicy Diavolo\",
+        \"description\": \"Calabrian chili, nduja, fior di latte, hot honey drizzle.\",
+        \"price\": 21.00,
+        \"rating\": 4.7,
+        \"category\": \"non-veg\",
+        \"image\": \"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800\",
+        \"tags\": [\"spicy\"],
+    },
+    {
+        \"item_id\": \"m_salad_01\",
+        \"name\": \"Charred Citrus Salad\",
+        \"description\": \"Blood orange, burrata, arugula, smoked almonds.\",
+        \"price\": 14.00,
+        \"rating\": 4.6,
+        \"category\": \"veg\",
+        \"image\": \"https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800\",
+        \"tags\": [\"fresh\"],
+    },
+    {
+        \"item_id\": \"m_dessert_01\",
+        \"name\": \"Molten Chocolate Orb\",
+        \"description\": \"Dark Valrhona chocolate sphere, salted caramel lava, vanilla bean ice cream.\",
+        \"price\": 12.00,
+        \"rating\": 4.9,
+        \"category\": \"desserts\",
+        \"image\": \"https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800\",
+        \"tags\": [\"signature\", \"sweet\"],
+    },
+    {
+        \"item_id\": \"m_dessert_02\",
+        \"name\": \"Crème Brûlée Flight\",
+        \"description\": \"Trio of vanilla, espresso, and lavender crème brûlée.\",
+        \"price\": 13.50,
+        \"rating\": 4.7,
+        \"category\": \"desserts\",
+        \"image\": \"https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=800\",
+        \"tags\": [\"classic\"],
+    },
+    {
+        \"item_id\": \"m_drink_01\",
+        \"name\": \"Smoked Old Fashioned\",
+        \"description\": \"Bourbon, demerara, aromatic bitters, hickory smoke.\",
+        \"price\": 16.00,
+        \"rating\": 4.8,
+        \"category\": \"drinks\",
+        \"image\": \"https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800\",
+        \"tags\": [\"cocktail\", \"smoked\"],
+    },
+    {
+        \"item_id\": \"m_nonveg_01\",
+        \"name\": \"Herb-Crusted Lamb Rack\",
+        \"description\": \"Rosemary, thyme, Dijon crust, red wine jus, heirloom root veg.\",
+        \"price\": 38.00,
+        \"rating\": 4.9,
+        \"category\": \"non-veg\",
+        \"image\": \"https://images.unsplash.com/photo-1544025162-d76694265947?w=800\",
+        \"tags\": [\"signature\"],
+    },
+    {
+        \"item_id\": \"m_veg_01\",
+        \"name\": \"Wild Mushroom Risotto\",
+        \"description\": \"Porcini, shiitake, aged parmigiano, truffle shavings.\",
+        \"price\": 22.00,
+        \"rating\": 4.7,
+        \"category\": \"veg\",
+        \"image\": \"https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=800\",
+        \"tags\": [\"comfort\"],
+    },
+]
+
+SAMPLE_REVIEWS = [
+    {
+        \"review_id\": \"rev_seed_01\",
+        \"name\": \"Amelia Rivera\",
+        \"rating\": 5,
+        \"comment\": \"Every bite feels like a curated memory. The truffle margherita is poetry.\",
+        \"avatar\": \"https://i.pravatar.cc/150?img=48\",
+        \"created_at\": datetime.now(timezone.utc),
+    },
+    {
+        \"review_id\": \"rev_seed_02\",
+        \"name\": \"Marcus Chen\",
+        \"rating\": 5,
+        \"comment\": \"The ambience, the smoked cocktails, the lamb rack — nothing short of cinematic.\",
+        \"avatar\": \"https://i.pravatar.cc/150?img=12\",
+        \"created_at\": datetime.now(timezone.utc),
+    },
+    {
+        \"review_id\": \"rev_seed_03\",
+        \"name\": \"Sofia Laurent\",
+        \"rating\": 4,
+        \"comment\": \"Beautiful presentation and thoughtful flavors. A must-visit for special occasions.\",
+        \"avatar\": \"https://i.pravatar.cc/150?img=32\",
+        \"created_at\": datetime.now(timezone.utc),
+    },
+]
+
+
+@app.on_event(\"startup\")
+async def seed_data():
+    if await db.menu_items.count_documents({}) == 0:
+        await db.menu_items.insert_many(SAMPLE_MENU)
+        logger.info(f\"Seeded {len(SAMPLE_MENU)} menu items\")
+    if await db.reviews.count_documents({}) == 0:
+        await db.reviews.insert_many(SAMPLE_REVIEWS)
+        logger.info(f\"Seeded {len(SAMPLE_REVIEWS)} reviews\")
+
+
+app.include_router(api_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_origins=[\"*\"],
+    allow_methods=[\"*\"],
+    allow_headers=[\"*\"],
+)
+
+
+@app.on_event(\"shutdown\")
+async def shutdown_db_client():
+    client.close()
+"
+Observation: Overwrite successful: /app/backend/server.py
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [185] using WatchFiles
+INFO:     Started server process [222]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+
+
+
+Action: $ cd /app/frontend && yarn add expo-linear-gradient@~15.0.8 2>&1 | tail -5
+Observation: info Direct dependencies
+└─ expo-linear-gradient@15.0.8
+info All dependencies
+└─ expo-linear-gradient@15.0.8
+Done in 5.17s.
+Exit code: 0
+
+
+
+
+
+
+
+
+
+Now let me build the frontend. First, the contexts and root layout:
+Action: file_editor create /app/frontend/src/theme.ts --file-text "/**
+ * App-wide theme tokens derived from /app/design_guidelines.json
+ */
+export const theme = {
+  colors: {
+    bg: \"#0B0808\",
+    bgPaper: \"#141010\",
+    glass: \"rgba(20, 16, 16, 0.6)\",
+    primary: \"#FF4D00\",
+    primaryLight: \"#FF7333\",
+    primaryDark: \"#CC3D00\",
+    primaryGlow: \"rgba(255, 77, 0, 0.4)\",
+    secondary: \"#D2691E\",
+    gold: \"#FFB800\",
+    brown: \"#4A3224\",
+    text: \"#FDF8F5\",
+    textSecondary: \"#A89A94\",
+    textDisabled: \"#665C58\",
+    border: \"rgba(255, 255, 255, 0.08)\",
+    borderHighlight: \"rgba(255, 77, 0, 0.3)\",
+  },
+  spacing: {
+    xs2: 4,
+    xs: 8,
+    sm: 12,
+    md: 16,
+    lg: 24,
+    xl: 32,
+    xl2: 48,
+    xl3: 64,
+  },
+  radius: {
+    sm: 8,
+    md: 16,
+    lg: 24,
+    pill: 9999,
+  },
+  font: {
+    h1: { fontFamily: \"Outfit_700Bold\", fontSize: 40, letterSpacing: -1.2, lineHeight: 48 },
+    h2: { fontFamily: \"Outfit_600SemiBold\", fontSize: 30, letterSpacing: -0.8, lineHeight: 36 },
+    h3: { fontFamily: \"Outfit_500Medium\", fontSize: 22, letterSpacing: -0.4, lineHeight: 30 },
+    bodyLg: { fontFamily: \"Manrope_500Medium\", fontSize: 17, lineHeight: 26 },
+    body: { fontFamily: \"Manrope_400Regular\", fontSize: 15, lineHeight: 22 },
+    bodySm: { fontFamily: \"Manrope_500Medium\", fontSize: 13, lineHeight: 18 },
+    overline: {
+      fontFamily: \"Outfit_700Bold\",
+      fontSize: 11,
+      letterSpacing: 2,
+      textTransform: \"uppercase\" as const,
+    },
+  },
+};
+
+export const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+"
+Observation: Create successful: /app/frontend/src/theme.ts
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+Action: file_editor create /app/frontend/src/auth.tsx --file-text "/**
+ * AuthContext — Emergent Google OAuth
+ * REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
+ */
+import React, { createContext, useContext, useEffect, useState, useCallback } from \"react\";
+import { Platform } from \"react-native\";
+import { BACKEND_URL } from \"./theme\";
+
+export type User = {
+  user_id: string;
+  email: string;
+  name: string;
+  picture?: string;
+};
+
+type AuthContextValue = {
+  user: User | null;
+  loading: boolean;
+  sessionToken: string | null;
+  loginWithGoogle: () => void;
+  logout: () => Promise<void>;
+  refresh: () => Promise<void>;
+  processSessionId: (sessionId: string) => Promise<User | null>;
+};
+
+const AuthContext = createContext<AuthContextValue | null>(null);
+
+// In-memory session token (for native where cookies aren't reliable)
+let tokenMem: string | null = null;
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
+
+  const refresh = useCallback(async () => {
+    try {
+      const headers: Record<string, string> = {};
+      if (tokenMem) headers[\"Authorization\"] = `Bearer ${tokenMem}`;
+      const res = await fetch(`${BACKEND_URL}/api/auth/me`, {
+        credentials: \"include\",
+        headers,
+      });
+      if (!res.ok) {
+        setUser(null);
+        return;
+      }
+      const data = await res.json();
+      setUser(data);
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // If returning from OAuth callback, skip /me check — callback handles it.
+    if (Platform.OS === \"web\" && typeof window !== \"undefined\" && window.location.hash?.includes(\"session_id=\")) {
+      setLoading(false);
+      return;
+    }
+    refresh();
+  }, [refresh]);
+
+  const loginWithGoogle = useCallback(() => {
+    // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
+    if (Platform.OS === \"web\" && typeof window !== \"undefined\") {
+      const redirectUrl = window.location.origin + \"/profile\";
+      window.location.href = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
+    }
+  }, []);
+
+  const processSessionId = useCallback(async (sessionId: string): Promise<User | null> => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/auth/session`, {
+        method: \"POST\",
+        headers: { \"Content-Type\": \"application/json\" },
+        credentials: \"include\",
+        body: JSON.stringify({ session_id: sessionId }),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      tokenMem = data.session_token;
+      setSessionToken(data.session_token);
+      const u: User = {
+        user_id: data.user_id,
+        email: data.email,
+        name: data.name,
+        picture: data.picture,
+      };
+      setUser(u);
+      return u;
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const logout = useCallback(async () => {
+    try {
+      const headers: Record<string, string> = {};
+      if (tokenMem) headers[\"Authorization\"] = `Bearer ${tokenMem}`;
+      await fetch(`${BACKEND_URL}/api/auth/logout`, {
+        method: \"POST\",
+        credentials: \"include\",
+        headers,
+      });
+    } catch {}
+    tokenMem = null;
+    setSessionToken(null);
+    setUser(null);
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, loading, sessionToken, loginWithGoogle, logout, refresh, processSessionId }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error(\"useAuth must be used inside AuthProvider\");
+  return ctx;
+}
+
+export function getAuthHeaders(): Record<string, string> {
+  return tokenMem ? { Authorization: `Bearer ${tokenMem}` } : {};
+}
+"
+Observation: Create successful: /app/frontend/src/auth.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+Action: file_editor create /app/frontend/src/cart.tsx --file-text "/**
+ * CartContext — client-side cart state
+ */
+import React, { createContext, useContext, useMemo, useState, useCallback } from \"react\";
+
+export type CartItem = {
+  item_id: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+};
+
+type CartContextValue = {
+  items: CartItem[];
+  count: number;
+  total: number;
+  add: (item: Omit<CartItem, \"quantity\">) => void;
+  remove: (item_id: string) => void;
+  updateQty: (item_id: string, qty: number) => void;
+  clear: () => void;
+};
+
+const CartContext = createContext<CartContextValue | null>(null);
+
+export function CartProvider({ children }: { children: React.ReactNode }) {
+  const [items, setItems] = useState<CartItem[]>([]);
+
+  const add = useCallback((item: Omit<CartItem, \"quantity\">) => {
+    setItems((prev) => {
+      const existing = prev.find((i) => i.item_id === item.item_id);
+      if (existing) {
+        return prev.map((i) => (i.item_id === item.item_id ? { ...i, quantity: i.quantity + 1 } : i));
+      }
+      return [...prev, { ...item, quantity: 1 }];
+    });
+  }, []);
+
+  const remove = useCallback((item_id: string) => {
+    setItems((prev) => prev.filter((i) => i.item_id !== item_id));
+  }, []);
+
+  const updateQty = useCallback((item_id: string, qty: number) => {
+    if (qty <= 0) {
+      setItems((prev) => prev.filter((i) => i.item_id !== item_id));
+      return;
+    }
+    setItems((prev) => prev.map((i) => (i.item_id === item_id ? { ...i, quantity: qty } : i)));
+  }, []);
+
+  const clear = useCallback(() => setItems([]), []);
+
+  const value = useMemo(
+    () => ({
+      items,
+      count: items.reduce((s, i) => s + i.quantity, 0),
+      total: items.reduce((s, i) => s + i.price * i.quantity, 0),
+      add,
+      remove,
+      updateQty,
+      clear,
+    }),
+    [items, add, remove, updateQty, clear]
+  );
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}
+
+export function useCart() {
+  const ctx = useContext(CartContext);
+  if (!ctx) throw new Error(\"useCart must be used inside CartProvider\");
+  return ctx;
+}
+"
+Observation: Create successful: /app/frontend/src/cart.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+Backend seeded. Now let me create the Expo Router layouts and screens:
+Action: file_editor create /app/frontend/app/_layout.tsx --file-text "/**
+ * Root layout — fonts, providers, stack
+ */
+import React, { useEffect } from \"react\";
+import { Stack } from \"expo-router\";
+import { StatusBar } from \"expo-status-bar\";
+import { View, ActivityIndicator, StyleSheet, Platform } from \"react-native\";
+import { useFonts, Outfit_500Medium, Outfit_600SemiBold, Outfit_700Bold } from \"@expo-google-fonts/outfit\";
+import { Manrope_400Regular, Manrope_500Medium, Manrope_700Bold } from \"@expo-google-fonts/manrope\";
+import * as SplashScreen from \"expo-splash-screen\";
+import { AuthProvider, useAuth } from \"../src/auth\";
+import { CartProvider } from \"../src/cart\";
+import { theme } from \"../src/theme\";
+import { useRouter } from \"expo-router\";
+
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
+function AuthCallbackHandler() {
+  const { processSessionId } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (Platform.OS !== \"web\" || typeof window === \"undefined\") return;
+    const hash = window.location.hash;
+    if (!hash?.includes(\"session_id=\")) return;
+    const match = hash.match(/session_id=([^&]+)/);
+    if (!match) return;
+    const sid = decodeURIComponent(match[1]);
+    // Clear the hash immediately
+    window.history.replaceState(null, \"\", window.location.pathname);
+    (async () => {
+      const u = await processSessionId(sid);
+      if (u) {
+        router.replace(\"/profile\");
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return null;
+}
+
+function InnerLayout() {
+  return (
+    <>
+      <AuthCallbackHandler />
+      <StatusBar style=\"light\" />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: theme.colors.bg },
+          animation: \"fade\",
+        }}
+      >
+        <Stack.Screen name=\"(tabs)\" />
+      </Stack>
+    </>
+  );
+}
+
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
+    Outfit_500Medium,
+    Outfit_600SemiBold,
+    Outfit_700Bold,
+    Manrope_400Regular,
+    Manrope_500Medium,
+    Manrope_700Bold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) SplashScreen.hideAsync().catch(() => {});
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.splash}>
+        <ActivityIndicator color={theme.colors.primary} size=\"large\" />
+      </View>
+    );
+  }
+
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <InnerLayout />
+      </CartProvider>
+    </AuthProvider>
+  );
+}
+
+const styles = StyleSheet.create({
+  splash: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+    alignItems: \"center\",
+    justifyContent: \"center\",
+  },
+});
+"
+Observation: Create successful: /app/frontend/app/_layout.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+Action: $ rm -f /app/frontend/app/index.tsx && ls /app/frontend/app
+Observation: +html.tsx
+_layout.tsx
+Exit code: 0
+
+
+
+
+
+
+Now the tabs layout and screens:
+Action: file_editor create /app/frontend/app/(tabs)/_layout.tsx --file-text "/**
+ * Tab layout — floating glassmorphism bottom tabs
+ */
+import React from \"react\";
+import { Tabs } from \"expo-router\";
+import { View, StyleSheet, Platform } from \"react-native\";
+import { BlurView } from \"expo-blur\";
+import { Ionicons } from \"@expo/vector-icons\";
+import { theme } from \"../../src/theme\";
+import { useCart } from \"../../src/cart\";
+import { Text } from \"react-native\";
+
+function CartBadge() {
+  const { count } = useCart();
+  if (!count) return null;
+  return (
+    <View style={styles.badge} testID=\"cart-badge\">
+      <Text style={styles.badgeText}>{count > 9 ? \"9+\" : count}</Text>
+    </View>
+  );
+}
+
+export default function TabsLayout() {
+  return (
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: true,
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.textSecondary,
+        tabBarLabelStyle: {
+          fontFamily: \"Outfit_600SemiBold\",
+          fontSize: 11,
+          letterSpacing: 0.5,
+          marginTop: -2,
+        },
+        tabBarStyle: {
+          position: \"absolute\",
+          left: 16,
+          right: 16,
+          bottom: Platform.OS === \"ios\" ? 24 : 16,
+          height: 68,
+          borderRadius: 34,
+          backgroundColor: \"rgba(11, 8, 8, 0.75)\",
+          borderTopWidth: 0,
+          borderWidth: 1,
+          borderColor: theme.colors.border,
+          elevation: 16,
+          shadowColor: \"#000\",
+          shadowOffset: { width: 0, height: 8 },
+          shadowOpacity: 0.45,
+          shadowRadius: 16,
+          paddingHorizontal: 10,
+          paddingTop: 10,
+          paddingBottom: 10,
+        },
+        tabBarBackground: () => (
+          <BlurView
+            intensity={40}
+            tint=\"dark\"
+            style={StyleSheet.absoluteFill}
+            // @ts-ignore - rn-web
+            experimentalBlurMethod=\"dimezisBlurView\"
+          >
+            <View style={[StyleSheet.absoluteFill, { borderRadius: 34, overflow: \"hidden\" }]} />
+          </BlurView>
+        ),
+      }}
+    >
+      <Tabs.Screen
+        name=\"index\"
+        options={{
+          title: \"Home\",
+          tabBarIcon: ({ color, size }) => <Ionicons name=\"flame\" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name=\"menu\"
+        options={{
+          title: \"Menu\",
+          tabBarIcon: ({ color, size }) => <Ionicons name=\"restaurant\" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name=\"cart\"
+        options={{
+          title: \"Cart\",
+          tabBarIcon: ({ color, size }) => (
+            <View>
+              <Ionicons name=\"bag-handle\" size={size} color={color} />
+              <CartBadge />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name=\"bookings\"
+        options={{
+          title: \"Bookings\",
+          tabBarIcon: ({ color, size }) => <Ionicons name=\"calendar\" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name=\"profile\"
+        options={{
+          title: \"Profile\",
+          tabBarIcon: ({ color, size }) => <Ionicons name=\"person-circle\" size={size} color={color} />,
+        }}
+      />
+    </Tabs>
+  );
+}
+
+const styles = StyleSheet.create({
+  badge: {
+    position: \"absolute\",
+    top: -6,
+    right: -10,
+    minWidth: 18,
+    height: 18,
+    borderRadius: 9,
+    paddingHorizontal: 5,
+    backgroundColor: theme.colors.primary,
+    alignItems: \"center\",
+    justifyContent: \"center\",
+  },
+  badgeText: {
+    color: \"#fff\",
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 10,
+    lineHeight: 14,
+  },
+});
+"
+Observation: Create successful: /app/frontend/app/(tabs)/_layout.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+Action: file_editor create /app/frontend/app/(tabs)/index.tsx --file-text "/**
+ * Home / Animated Landing — cinematic hero with pizza slide, coffee rotate+steam, burger stagger,
+ * parallax scroll, menu preview, testimonials carousel.
+ */
+import React, { useEffect, useRef, useState } from \"react\";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Platform,
+} from \"react-native\";
+import { useRouter } from \"expo-router\";
+import { LinearGradient } from \"expo-linear-gradient\";
+import { BlurView } from \"expo-blur\";
+import { Ionicons } from \"@expo/vector-icons\";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  useAnimatedScrollHandler,
+  withRepeat,
+  withTiming,
+  withSequence,
+  withSpring,
+  withDelay,
+  interpolate,
+  Extrapolation,
+  Easing,
+} from \"react-native-reanimated\";
+import { theme } from \"../../src/theme\";
+
+const { width: SCREEN_W } = Dimensions.get(\"window\");
+
+const HERO_PIZZA = \"https://images.pexels.com/photos/35017345/pexels-photo-35017345.jpeg\";
+const HERO_BURGER = \"https://images.pexels.com/photos/35832466/pexels-photo-35832466.jpeg\";
+const HERO_COFFEE = \"https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg\";
+
+function Steam({ delay = 0, left = 0 }: { delay?: number; left?: number }) {
+  const progress = useSharedValue(0);
+  useEffect(() => {
+    progress.value = withDelay(
+      delay,
+      withRepeat(withTiming(1, { duration: 2200, easing: Easing.out(Easing.ease) }), -1, false)
+    );
+  }, [delay, progress]);
+  const s = useAnimatedStyle(() => ({
+    opacity: interpolate(progress.value, [0, 0.3, 1], [0, 0.7, 0]),
+    transform: [
+      { translateY: interpolate(progress.value, [0, 1], [0, -80]) },
+      { scale: interpolate(progress.value, [0, 1], [0.6, 1.6]) },
+    ],
+  }));
+  return <Animated.View style={[styles.steam, { left }, s]} />;
+}
+
+function FloatingOrb({ x, y, size, delay }: { x: number; y: number; size: number; delay: number }) {
+  const p = useSharedValue(0);
+  useEffect(() => {
+    p.value = withDelay(
+      delay,
+      withRepeat(withTiming(1, { duration: 6000 + delay, easing: Easing.inOut(Easing.ease) }), -1, true)
+    );
+  }, [delay, p]);
+  const s = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: interpolate(p.value, [0, 1], [0, -40]) },
+      { translateX: interpolate(p.value, [0, 1], [0, 20]) },
+    ],
+    opacity: interpolate(p.value, [0, 0.5, 1], [0.3, 0.7, 0.3]),
+  }));
+  return <Animated.View style={[styles.orb, { left: x, top: y, width: size, height: size, borderRadius: size }, s]} />;
+}
+
+export default function Home() {
+  const router = useRouter();
+  const scrollY = useSharedValue(0);
+  const scrollHandler = useAnimatedScrollHandler((e) => {
+    scrollY.value = e.contentOffset.y;
+  });
+
+  // Pizza: slides in from left, then floats continuously
+  const pizzaFloat = useSharedValue(0);
+  const pizzaEnter = useSharedValue(0);
+  // Coffee: fades in, subtle rotation
+  const coffeeEnter = useSharedValue(0);
+  const coffeeRotate = useSharedValue(0);
+  // Burger: stagger spring drop
+  const burgerDrop = useSharedValue(0);
+
+  useEffect(() => {
+    pizzaEnter.value = withSpring(1, { damping: 12, stiffness: 80 });
+    pizzaFloat.value = withRepeat(
+      withTiming(1, { duration: 3200, easing: Easing.inOut(Easing.ease) }),
+      -1,
+      true
+    );
+    coffeeEnter.value = withDelay(200, withTiming(1, { duration: 900 }));
+    coffeeRotate.value = withRepeat(
+      withSequence(
+        withTiming(1, { duration: 2400, easing: Easing.inOut(Easing.ease) }),
+        withTiming(-1, { duration: 2400, easing: Easing.inOut(Easing.ease) })
+      ),
+      -1,
+      true
+    );
+    burgerDrop.value = withDelay(400, withSpring(1, { damping: 10, stiffness: 70 }));
+  }, [pizzaEnter, pizzaFloat, coffeeEnter, coffeeRotate, burgerDrop]);
+
+  // Parallax mappings
+  const pizzaStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: interpolate(pizzaEnter.value, [0, 1], [-220, 0]) + scrollY.value * 0.35 },
+      { translateY: interpolate(pizzaFloat.value, [0, 1], [0, -14]) + scrollY.value * -0.15 },
+      { rotate: `${interpolate(scrollY.value, [0, 400], [-8, 18], Extrapolation.CLAMP)}deg` },
+    ],
+    opacity: interpolate(scrollY.value, [0, 500], [1, 0.3], Extrapolation.CLAMP),
+  }));
+
+  const coffeeStyle = useAnimatedStyle(() => ({
+    opacity: coffeeEnter.value * interpolate(scrollY.value, [0, 500], [1, 0.2], Extrapolation.CLAMP),
+    transform: [
+      { scale: interpolate(coffeeEnter.value, [0, 1], [0.6, 1]) },
+      { rotate: `${coffeeRotate.value * 6}deg` },
+      { translateY: scrollY.value * -0.25 },
+    ],
+  }));
+
+  const burgerStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: interpolate(burgerDrop.value, [0, 1], [-180, 0]) + scrollY.value * -0.1 },
+      { scale: interpolate(burgerDrop.value, [0, 1], [0.7, 1]) },
+      { rotate: `${interpolate(scrollY.value, [0, 400], [0, -12], Extrapolation.CLAMP)}deg` },
+    ],
+    opacity: interpolate(scrollY.value, [0, 500], [1, 0.25], Extrapolation.CLAMP),
+  }));
+
+  const titleStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.value, [0, 300], [1, 0], Extrapolation.CLAMP),
+    transform: [{ translateY: scrollY.value * 0.3 }],
+  }));
+
+  const bgStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: scrollY.value * -0.4 }],
+  }));
+
+  // Menu preview
+  const [menuPreview, setMenuPreview] = useState<any[]>([]);
+  const [reviews, setReviews] = useState<any[]>([]);
+  useEffect(() => {
+    fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/menu`)
+      .then((r) => r.json())
+      .then((d) => setMenuPreview(d.slice(0, 5)))
+      .catch(() => {});
+    fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/reviews`)
+      .then((r) => r.json())
+      .then(setReviews)
+      .catch(() => {});
+  }, []);
+
+  // Testimonial carousel
+  const [reviewIdx, setReviewIdx] = useState(0);
+  useEffect(() => {
+    if (!reviews.length) return;
+    const t = setInterval(() => setReviewIdx((i) => (i + 1) % reviews.length), 4200);
+    return () => clearInterval(t);
+  }, [reviews.length]);
+
+  return (
+    <View style={styles.root} testID=\"home-screen\">
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 140 }}
+      >
+        {/* HERO */}
+        <View style={styles.hero}>
+          <Animated.View style={[StyleSheet.absoluteFill, bgStyle]}>
+            <LinearGradient
+              colors={[\"#1a0d06\", \"#0B0808\", \"#0B0808\"]}
+              style={StyleSheet.absoluteFill}
+            />
+            <FloatingOrb x={40} y={120} size={180} delay={0} />
+            <FloatingOrb x={SCREEN_W - 200} y={320} size={220} delay={1500} />
+            <FloatingOrb x={SCREEN_W / 2 - 100} y={520} size={160} delay={2800} />
+          </Animated.View>
+
+          <Animated.View style={[styles.brandRow, titleStyle]}>
+            <Text style={styles.brandMark}>GUSTO</Text>
+            <View style={styles.brandDot} />
+            <Text style={styles.brandMark}>EMBER</Text>
+          </Animated.View>
+
+          <Animated.View style={[styles.heroContent, titleStyle]}>
+            <Text style={styles.overline}>EST. 2026 · TASTING KITCHEN</Text>
+            <Text style={styles.heroTitle}>Where flame meets{\"\n\"}finesse.</Text>
+            <Text style={styles.heroSub}>
+              A tasting journey of wood-fired classics, smoked cocktails, and molten desserts —
+              served in a cinematic setting.
+            </Text>
+
+            <View style={styles.ctaRow}>
+              <TouchableOpacity
+                onPress={() => router.push(\"/bookings\")}
+                style={[styles.ctaPrimary]}
+                testID=\"cta-book-table\"
+              >
+                <Text style={styles.ctaPrimaryText}>Book a Table</Text>
+                <Ionicons name=\"arrow-forward\" size={18} color=\"#fff\" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => router.push(\"/menu\")}
+                style={styles.ctaSecondary}
+                testID=\"cta-order-now\"
+              >
+                <Text style={styles.ctaSecondaryText}>Order Now</Text>
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+
+          {/* Animated food items */}
+          <Animated.View style={[styles.foodItem, styles.pizzaPos, pizzaStyle]} pointerEvents=\"none\">
+            <Image source={{ uri: HERO_PIZZA }} style={styles.foodImg} />
+            <View style={styles.foodGlow} />
+          </Animated.View>
+
+          <Animated.View style={[styles.foodItem, styles.coffeePos, coffeeStyle]} pointerEvents=\"none\">
+            <Steam delay={0} left={38} />
+            <Steam delay={700} left={58} />
+            <Steam delay={1400} left={78} />
+            <Image source={{ uri: HERO_COFFEE }} style={styles.foodImg} />
+          </Animated.View>
+
+          <Animated.View style={[styles.foodItem, styles.burgerPos, burgerStyle]} pointerEvents=\"none\">
+            <Image source={{ uri: HERO_BURGER }} style={styles.foodImg} />
+            <View style={styles.foodGlow} />
+          </Animated.View>
+
+          <View style={styles.scrollHint}>
+            <Text style={styles.scrollHintText}>SCROLL</Text>
+            <Ionicons name=\"chevron-down\" size={14} color={theme.colors.textSecondary} />
+          </View>
+        </View>
+
+        {/* SIGNATURE STRIP */}
+        <View style={styles.section}>
+          <Text style={styles.overline}>SIGNATURES</Text>
+          <Text style={styles.sectionTitle}>Crafted with fire.</Text>
+          <Text style={styles.sectionSub}>Five dishes that define our kitchen.</Text>
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 8, gap: 14 }}
+            style={{ marginTop: 24 }}
+          >
+            {menuPreview.map((m, i) => (
+              <StaggerCard key={m.item_id} item={m} index={i} onPress={() => router.push(\"/menu\")} />
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* STATS */}
+        <View style={styles.statsRow}>
+          <StatBlock num=\"120+\" label=\"Dishes\" />
+          <View style={styles.statDivider} />
+          <StatBlock num=\"4.9\" label=\"Avg Rating\" />
+          <View style={styles.statDivider} />
+          <StatBlock num=\"24k\" label=\"Guests\" />
+        </View>
+
+        {/* TESTIMONIAL */}
+        <View style={styles.section}>
+          <Text style={styles.overline}>WHAT GUESTS SAY</Text>
+          <Text style={styles.sectionTitle}>A seat at the table.</Text>
+
+          {reviews[reviewIdx] && (
+            <BlurView intensity={40} tint=\"dark\" style={styles.testimonialCard}>
+              <View style={{ flexDirection: \"row\", gap: 3, marginBottom: 12 }}>
+                {[0, 1, 2, 3, 4].map((s) => (
+                  <Ionicons
+                    key={s}
+                    name=\"star\"
+                    size={14}
+                    color={s < reviews[reviewIdx].rating ? theme.colors.gold : theme.colors.textDisabled}
+                  />
+                ))}
+              </View>
+              <Text style={styles.testimonialText}>&ldquo;{reviews[reviewIdx].comment}&rdquo;</Text>
+              <View style={styles.testimonialFooter}>
+                <Image source={{ uri: reviews[reviewIdx].avatar }} style={styles.avatar} />
+                <Text style={styles.testimonialAuthor}>{reviews[reviewIdx].name}</Text>
+              </View>
+              <View style={styles.dotsRow}>
+                {reviews.map((_, i) => (
+                  <View
+                    key={i}
+                    style={[
+                      styles.dot,
+                      { backgroundColor: i === reviewIdx ? theme.colors.primary : theme.colors.border },
+                    ]}
+                  />
+                ))}
+              </View>
+            </BlurView>
+          )}
+        </View>
+
+        {/* FINAL CTA */}
+        <View style={styles.finalCta}>
+          <LinearGradient
+            colors={[theme.colors.primaryDark, theme.colors.primary]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.finalCtaBg}
+          />
+          <Text style={styles.finalCtaTitle}>Ready for tonight?</Text>
+          <Text style={styles.finalCtaSub}>Reserve your table — only a handful of seats remain.</Text>
+          <TouchableOpacity
+            style={styles.finalCtaBtn}
+            onPress={() => router.push(\"/bookings\")}
+            testID=\"final-cta-reserve\"
+          >
+            <Text style={styles.finalCtaBtnText}>Reserve Now</Text>
+            <Ionicons name=\"arrow-forward\" size={18} color={theme.colors.primary} />
+          </TouchableOpacity>
+        </View>
+      </Animated.ScrollView>
+    </View>
+  );
+}
+
+function StaggerCard({ item, index, onPress }: { item: any; index: number; onPress: () => void }) {
+  const p = useSharedValue(0);
+  useEffect(() => {
+    p.value = withDelay(index * 120, withSpring(1, { damping: 14, stiffness: 90 }));
+  }, [index, p]);
+  const s = useAnimatedStyle(() => ({
+    opacity: p.value,
+    transform: [{ translateY: interpolate(p.value, [0, 1], [40, 0]) }, { scale: interpolate(p.value, [0, 1], [0.9, 1]) }],
+  }));
+  return (
+    <Animated.View style={s}>
+      <TouchableOpacity onPress={onPress} style={styles.previewCard} testID={`preview-${item.item_id}`}>
+        <Image source={{ uri: item.image }} style={styles.previewImg} />
+        <LinearGradient
+          colors={[\"transparent\", \"rgba(11,8,8,0.95)\"]}
+          style={styles.previewGradient}
+        />
+        <View style={styles.previewInfo}>
+          <Text style={styles.previewName} numberOfLines={1}>
+            {item.name}
+          </Text>
+          <View style={styles.previewMeta}>
+            <View style={{ flexDirection: \"row\", alignItems: \"center\", gap: 4 }}>
+              <Ionicons name=\"star\" size={12} color={theme.colors.gold} />
+              <Text style={styles.previewRating}>{item.rating}</Text>
+            </View>
+            <Text style={styles.previewPrice}>${item.price.toFixed(2)}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </Animated.View>
+  );
+}
+
+function StatBlock({ num, label }: { num: string; label: string }) {
+  return (
+    <View style={{ alignItems: \"center\", flex: 1 }}>
+      <Text style={styles.statNum}>{num}</Text>
+      <Text style={styles.statLabel}>{label}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: theme.colors.bg },
+  hero: {
+    height: 720,
+    paddingTop: Platform.OS === \"ios\" ? 60 : 40,
+    paddingHorizontal: 24,
+    overflow: \"hidden\",
+  },
+  brandRow: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 10,
+    marginBottom: 24,
+  },
+  brandMark: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 14,
+    letterSpacing: 4,
+    color: theme.colors.text,
+  },
+  brandDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: theme.colors.primary },
+  heroContent: { marginTop: 20, zIndex: 2 },
+  overline: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 11,
+    letterSpacing: 3,
+    color: theme.colors.primary,
+    marginBottom: 12,
+  },
+  heroTitle: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 54,
+    lineHeight: 58,
+    color: theme.colors.text,
+    letterSpacing: -2,
+  },
+  heroSub: {
+    fontFamily: \"Manrope_400Regular\",
+    fontSize: 15,
+    lineHeight: 22,
+    color: theme.colors.textSecondary,
+    marginTop: 16,
+    maxWidth: 340,
+  },
+  ctaRow: { flexDirection: \"row\", gap: 12, marginTop: 28 },
+  ctaPrimary: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 8,
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 14,
+    paddingHorizontal: 22,
+    borderRadius: 9999,
+    shadowColor: theme.colors.primary,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.5,
+    shadowRadius: 16,
+    elevation: 10,
+  },
+  ctaPrimaryText: { fontFamily: \"Outfit_600SemiBold\", color: \"#fff\", fontSize: 14, letterSpacing: 0.3 },
+  ctaSecondary: {
+    paddingVertical: 14,
+    paddingHorizontal: 22,
+    borderRadius: 9999,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    backgroundColor: theme.colors.bgPaper,
+  },
+  ctaSecondaryText: { fontFamily: \"Outfit_600SemiBold\", color: theme.colors.text, fontSize: 14 },
+
+  foodItem: { position: \"absolute\", zIndex: 1 },
+  foodImg: { width: 200, height: 200, borderRadius: 100 },
+  foodGlow: {
+    position: \"absolute\",
+    width: 260,
+    height: 260,
+    borderRadius: 130,
+    backgroundColor: theme.colors.primaryGlow,
+    top: -30,
+    left: -30,
+    zIndex: -1,
+    opacity: 0.6,
+  },
+  pizzaPos: { right: -40, top: 200 },
+  coffeePos: { left: -30, top: 420, zIndex: 3 },
+  burgerPos: { right: 20, bottom: 40 },
+
+  steam: {
+    position: \"absolute\",
+    top: 20,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: \"rgba(255,255,255,0.45)\",
+    zIndex: 5,
+  },
+
+  orb: {
+    position: \"absolute\",
+    backgroundColor: theme.colors.primaryGlow,
+    opacity: 0.15,
+  },
+
+  scrollHint: {
+    position: \"absolute\",
+    bottom: 16,
+    left: 0,
+    right: 0,
+    alignItems: \"center\",
+    gap: 4,
+  },
+  scrollHintText: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 10,
+    letterSpacing: 3,
+    color: theme.colors.textSecondary,
+  },
+
+  section: { paddingHorizontal: 24, paddingTop: 56 },
+  sectionTitle: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 34,
+    letterSpacing: -1.2,
+    color: theme.colors.text,
+    marginTop: 8,
+  },
+  sectionSub: {
+    fontFamily: \"Manrope_400Regular\",
+    fontSize: 15,
+    color: theme.colors.textSecondary,
+    marginTop: 6,
+  },
+
+  previewCard: {
+    width: 200,
+    height: 260,
+    borderRadius: 24,
+    overflow: \"hidden\",
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  previewImg: { width: \"100%\", height: \"100%\" },
+  previewGradient: { position: \"absolute\", bottom: 0, left: 0, right: 0, height: \"60%\" },
+  previewInfo: { position: \"absolute\", bottom: 14, left: 14, right: 14 },
+  previewName: { fontFamily: \"Outfit_600SemiBold\", color: theme.colors.text, fontSize: 16 },
+  previewMeta: {
+    flexDirection: \"row\",
+    justifyContent: \"space-between\",
+    alignItems: \"center\",
+    marginTop: 6,
+  },
+  previewRating: { fontFamily: \"Manrope_500Medium\", color: theme.colors.textSecondary, fontSize: 12 },
+  previewPrice: { fontFamily: \"Outfit_700Bold\", color: theme.colors.primary, fontSize: 16 },
+
+  statsRow: {
+    flexDirection: \"row\",
+    marginHorizontal: 24,
+    marginTop: 48,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 24,
+    paddingVertical: 22,
+  },
+  statDivider: { width: 1, backgroundColor: theme.colors.border, marginVertical: 8 },
+  statNum: { fontFamily: \"Outfit_700Bold\", fontSize: 26, color: theme.colors.primary, letterSpacing: -0.5 },
+  statLabel: {
+    fontFamily: \"Manrope_500Medium\",
+    fontSize: 11,
+    color: theme.colors.textSecondary,
+    letterSpacing: 1,
+    textTransform: \"uppercase\",
+    marginTop: 4,
+  },
+
+  testimonialCard: {
+    marginTop: 20,
+    padding: 24,
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    overflow: \"hidden\",
+    backgroundColor: theme.colors.glass,
+  },
+  testimonialText: {
+    fontFamily: \"Outfit_500Medium\",
+    fontSize: 18,
+    lineHeight: 28,
+    color: theme.colors.text,
+    letterSpacing: -0.3,
+  },
+  testimonialFooter: { flexDirection: \"row\", alignItems: \"center\", gap: 12, marginTop: 20 },
+  avatar: { width: 42, height: 42, borderRadius: 21, borderWidth: 1, borderColor: theme.colors.border },
+  testimonialAuthor: { fontFamily: \"Outfit_600SemiBold\", color: theme.colors.text, fontSize: 14 },
+  dotsRow: { flexDirection: \"row\", gap: 6, marginTop: 20 },
+  dot: { width: 18, height: 4, borderRadius: 2 },
+
+  finalCta: {
+    margin: 24,
+    marginTop: 48,
+    padding: 28,
+    borderRadius: 32,
+    overflow: \"hidden\",
+  },
+  finalCtaBg: { ...StyleSheet.absoluteFillObject },
+  finalCtaTitle: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 30,
+    color: \"#fff\",
+    letterSpacing: -1,
+  },
+  finalCtaSub: {
+    fontFamily: \"Manrope_400Regular\",
+    fontSize: 14,
+    color: \"rgba(255,255,255,0.85)\",
+    marginTop: 8,
+  },
+  finalCtaBtn: {
+    marginTop: 20,
+    alignSelf: \"flex-start\",
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 8,
+    backgroundColor: \"#fff\",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 9999,
+  },
+  finalCtaBtnText: { fontFamily: \"Outfit_700Bold\", color: theme.colors.primary, fontSize: 14 },
+});
+"
+Observation: Create successful: /app/frontend/app/(tabs)/index.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+Now the Menu, Cart, Bookings, and Profile screens:
+Action: file_editor create /app/frontend/app/(tabs)/menu.tsx --file-text "/**
+ * Menu — filters + grid with tilt/scale animation on press
+ */
+import React, { useEffect, useState } from \"react\";
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Platform, ActivityIndicator } from \"react-native\";
+import { Ionicons } from \"@expo/vector-icons\";
+import { LinearGradient } from \"expo-linear-gradient\";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence,
+  withTiming,
+  withDelay,
+  interpolate,
+} from \"react-native-reanimated\";
+import * as Haptics from \"expo-haptics\";
+import { theme } from \"../../src/theme\";
+import { useCart } from \"../../src/cart\";
+
+const CATEGORIES = [
+  { key: \"all\", label: \"All\" },
+  { key: \"veg\", label: \"Veg\" },
+  { key: \"non-veg\", label: \"Non-Veg\" },
+  { key: \"drinks\", label: \"Drinks\" },
+  { key: \"desserts\", label: \"Desserts\" },
+];
+
+export default function Menu() {
+  const [category, setCategory] = useState(\"all\");
+  const [items, setItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { add } = useCart();
+
+  useEffect(() => {
+    setLoading(true);
+    const q = category === \"all\" ? \"\" : `?category=${encodeURIComponent(category)}`;
+    fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/menu${q}`)
+      .then((r) => r.json())
+      .then((d) => setItems(d))
+      .catch(() => setItems([]))
+      .finally(() => setLoading(false));
+  }, [category]);
+
+  const onAdd = (item: any) => {
+    add({ item_id: item.item_id, name: item.name, price: item.price, image: item.image });
+    if (Platform.OS !== \"web\") Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+  };
+
+  return (
+    <View style={styles.root} testID=\"menu-screen\">
+      <View style={styles.header}>
+        <Text style={styles.overline}>THE KITCHEN</Text>
+        <Text style={styles.title}>Our Menu</Text>
+        <Text style={styles.subtitle}>From fire-kissed mains to molten finales.</Text>
+      </View>
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.filters}
+      >
+        {CATEGORIES.map((c) => {
+          const active = c.key === category;
+          return (
+            <TouchableOpacity
+              key={c.key}
+              onPress={() => setCategory(c.key)}
+              style={[styles.chip, active && styles.chipActive]}
+              testID={`filter-${c.key}`}
+            >
+              <Text style={[styles.chipText, active && styles.chipTextActive]}>{c.label}</Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+
+      {loading ? (
+        <View style={styles.loader}>
+          <ActivityIndicator color={theme.colors.primary} />
+        </View>
+      ) : (
+        <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
+          {items.map((it, i) => (
+            <MenuCard key={it.item_id} item={it} index={i} onAdd={() => onAdd(it)} />
+          ))}
+        </ScrollView>
+      )}
+    </View>
+  );
+}
+
+function MenuCard({ item, index, onAdd }: { item: any; index: number; onAdd: () => void }) {
+  const enter = useSharedValue(0);
+  const press = useSharedValue(0);
+  const addPulse = useSharedValue(0);
+
+  useEffect(() => {
+    enter.value = withDelay(index * 70, withSpring(1, { damping: 14, stiffness: 90 }));
+  }, [enter, index]);
+
+  const cardStyle = useAnimatedStyle(() => ({
+    opacity: enter.value,
+    transform: [
+      { translateY: interpolate(enter.value, [0, 1], [30, 0]) },
+      { scale: interpolate(press.value, [0, 1], [1, 0.97]) },
+    ],
+  }));
+
+  const addBtnStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: interpolate(addPulse.value, [0, 0.5, 1], [1, 1.2, 1]) }],
+  }));
+
+  const handleAdd = () => {
+    addPulse.value = withSequence(withTiming(1, { duration: 180 }), withTiming(0, { duration: 180 }));
+    onAdd();
+  };
+
+  return (
+    <Animated.View style={[styles.card, cardStyle]} testID={`menu-card-${item.item_id}`}>
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPressIn={() => (press.value = withTiming(1, { duration: 120 }))}
+        onPressOut={() => (press.value = withTiming(0, { duration: 180 }))}
+        style={styles.cardInner}
+      >
+        <Image source={{ uri: item.image }} style={styles.cardImg} />
+        <LinearGradient
+          colors={[\"transparent\", \"rgba(11,8,8,0.1)\", \"rgba(11,8,8,0.95)\"]}
+          style={StyleSheet.absoluteFill}
+        />
+        <View style={styles.ratingPill}>
+          <Ionicons name=\"star\" size={11} color={theme.colors.gold} />
+          <Text style={styles.ratingText}>{item.rating}</Text>
+        </View>
+        <View style={styles.cardBody}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.cardName} numberOfLines={1}>
+              {item.name}
+            </Text>
+            <Text style={styles.cardDesc} numberOfLines={2}>
+              {item.description}
+            </Text>
+            <View style={styles.cardFooter}>
+              <Text style={styles.cardPrice}>${item.price.toFixed(2)}</Text>
+              <Animated.View style={addBtnStyle}>
+                <TouchableOpacity
+                  onPress={handleAdd}
+                  style={styles.addBtn}
+                  testID={`add-${item.item_id}`}
+                >
+                  <Ionicons name=\"add\" size={20} color=\"#fff\" />
+                </TouchableOpacity>
+              </Animated.View>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </Animated.View>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: theme.colors.bg, paddingTop: Platform.OS === \"ios\" ? 60 : 40 },
+  header: { paddingHorizontal: 24, paddingBottom: 16 },
+  overline: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 11,
+    letterSpacing: 3,
+    color: theme.colors.primary,
+    marginBottom: 8,
+  },
+  title: { fontFamily: \"Outfit_700Bold\", fontSize: 40, color: theme.colors.text, letterSpacing: -1.5 },
+  subtitle: { fontFamily: \"Manrope_400Regular\", fontSize: 14, color: theme.colors.textSecondary, marginTop: 6 },
+  filters: { paddingHorizontal: 24, gap: 10, paddingVertical: 16 },
+  chip: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 9999,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  chipActive: {
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primary,
+  },
+  chipText: { fontFamily: \"Outfit_600SemiBold\", fontSize: 13, color: theme.colors.textSecondary },
+  chipTextActive: { color: \"#fff\" },
+  loader: { paddingTop: 60 },
+  list: { paddingHorizontal: 24, paddingBottom: 160, gap: 16 },
+  card: {
+    borderRadius: 24,
+    overflow: \"hidden\",
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  cardInner: { height: 280 },
+  cardImg: { width: \"100%\", height: \"100%\", position: \"absolute\" },
+  ratingPill: {
+    position: \"absolute\",
+    top: 14,
+    right: 14,
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 9999,
+    backgroundColor: \"rgba(11,8,8,0.75)\",
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  ratingText: { fontFamily: \"Outfit_600SemiBold\", fontSize: 12, color: theme.colors.text },
+  cardBody: { position: \"absolute\", bottom: 0, left: 0, right: 0, padding: 18 },
+  cardName: { fontFamily: \"Outfit_700Bold\", fontSize: 22, color: theme.colors.text, letterSpacing: -0.5 },
+  cardDesc: { fontFamily: \"Manrope_400Regular\", fontSize: 13, color: theme.colors.textSecondary, marginTop: 4 },
+  cardFooter: {
+    flexDirection: \"row\",
+    justifyContent: \"space-between\",
+    alignItems: \"center\",
+    marginTop: 12,
+  },
+  cardPrice: { fontFamily: \"Outfit_700Bold\", fontSize: 22, color: theme.colors.primary },
+  addBtn: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: theme.colors.primary,
+    alignItems: \"center\",
+    justifyContent: \"center\",
+    shadowColor: theme.colors.primary,
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 6 },
+    shadowRadius: 12,
+    elevation: 6,
+  },
+});
+"
+Observation: Create successful: /app/frontend/app/(tabs)/menu.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+Action: file_editor create /app/frontend/app/(tabs)/cart.tsx --file-text "/**
+ * Cart — dynamic quantities, checkout flow with mock payment modal.
+ */
+import React, { useState } from \"react\";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Platform,
+  Modal,
+  ActivityIndicator,
+} from \"react-native\";
+import { Ionicons } from \"@expo/vector-icons\";
+import { LinearGradient } from \"expo-linear-gradient\";
+import Animated, { FadeIn, FadeOut, Layout } from \"react-native-reanimated\";
+import { theme } from \"../../src/theme\";
+import { useCart } from \"../../src/cart\";
+import { useAuth, getAuthHeaders } from \"../../src/auth\";
+import { useRouter } from \"expo-router\";
+
+export default function Cart() {
+  const { items, total, updateQty, clear } = useCart();
+  const { user, loginWithGoogle } = useAuth();
+  const router = useRouter();
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleCheckout = async () => {
+    if (!user) {
+      loginWithGoogle();
+      return;
+    }
+    setProcessing(true);
+    try {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/orders`, {
+        method: \"POST\",
+        headers: { \"Content-Type\": \"application/json\", ...getAuthHeaders() },
+        credentials: \"include\",
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            item_id: i.item_id,
+            name: i.name,
+            price: i.price,
+            quantity: i.quantity,
+            image: i.image,
+          })),
+          total,
+          payment_method: \"card\",
+        }),
+      });
+      if (!res.ok) throw new Error(\"checkout failed\");
+      const data = await res.json();
+      // Simulate payment animation
+      await new Promise((r) => setTimeout(r, 1500));
+      setSuccess(data.order_id);
+      clear();
+    } catch {
+      setSuccess(null);
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  const closeCheckout = () => {
+    setCheckoutOpen(false);
+    setSuccess(null);
+    setProcessing(false);
+  };
+
+  return (
+    <View style={styles.root} testID=\"cart-screen\">
+      <View style={styles.header}>
+        <Text style={styles.overline}>YOUR SELECTION</Text>
+        <Text style={styles.title}>Cart</Text>
+      </View>
+
+      {items.length === 0 ? (
+        <View style={styles.empty}>
+          <View style={styles.emptyIcon}>
+            <Ionicons name=\"bag-handle-outline\" size={48} color={theme.colors.textSecondary} />
+          </View>
+          <Text style={styles.emptyTitle}>Your cart is empty</Text>
+          <Text style={styles.emptySub}>Add something delicious from the menu.</Text>
+          <TouchableOpacity
+            style={styles.primaryBtn}
+            onPress={() => router.push(\"/menu\")}
+            testID=\"browse-menu-btn\"
+          >
+            <Text style={styles.primaryBtnText}>Browse Menu</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <>
+          <ScrollView contentContainerStyle={styles.list} showsVerticalScrollIndicator={false}>
+            {items.map((item) => (
+              <Animated.View
+                key={item.item_id}
+                entering={FadeIn}
+                exiting={FadeOut}
+                layout={Layout.springify()}
+                style={styles.row}
+                testID={`cart-row-${item.item_id}`}
+              >
+                <Image source={{ uri: item.image }} style={styles.rowImg} />
+                <View style={{ flex: 1, marginLeft: 14 }}>
+                  <Text style={styles.rowName} numberOfLines={1}>
+                    {item.name}
+                  </Text>
+                  <Text style={styles.rowPrice}>${item.price.toFixed(2)}</Text>
+                </View>
+                <View style={styles.qtyBox}>
+                  <TouchableOpacity
+                    onPress={() => updateQty(item.item_id, item.quantity - 1)}
+                    style={styles.qtyBtn}
+                    testID={`qty-minus-${item.item_id}`}
+                  >
+                    <Ionicons name=\"remove\" size={16} color={theme.colors.text} />
+                  </TouchableOpacity>
+                  <Text style={styles.qtyText}>{item.quantity}</Text>
+                  <TouchableOpacity
+                    onPress={() => updateQty(item.item_id, item.quantity + 1)}
+                    style={styles.qtyBtn}
+                    testID={`qty-plus-${item.item_id}`}
+                  >
+                    <Ionicons name=\"add\" size={16} color={theme.colors.text} />
+                  </TouchableOpacity>
+                </View>
+              </Animated.View>
+            ))}
+
+            <View style={styles.summary}>
+              <SummaryRow label=\"Subtotal\" value={`$${total.toFixed(2)}`} />
+              <SummaryRow label=\"Service (10%)\" value={`$${(total * 0.1).toFixed(2)}`} />
+              <View style={styles.divider} />
+              <SummaryRow
+                label=\"Total\"
+                value={`$${(total * 1.1).toFixed(2)}`}
+                bold
+              />
+            </View>
+          </ScrollView>
+
+          <View style={styles.footer}>
+            <View>
+              <Text style={styles.footerLabel}>Total</Text>
+              <Text style={styles.footerTotal}>${(total * 1.1).toFixed(2)}</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => setCheckoutOpen(true)}
+              style={styles.checkoutBtn}
+              testID=\"checkout-btn\"
+            >
+              <Text style={styles.checkoutBtnText}>Checkout</Text>
+              <Ionicons name=\"arrow-forward\" size={18} color=\"#fff\" />
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
+
+      {/* Checkout Modal */}
+      <Modal visible={checkoutOpen} animationType=\"slide\" transparent onRequestClose={closeCheckout}>
+        <View style={styles.modalBg}>
+          <View style={styles.modalSheet}>
+            <View style={styles.modalHandle} />
+            {success ? (
+              <View style={{ alignItems: \"center\", paddingVertical: 20 }}>
+                <LinearGradient
+                  colors={[theme.colors.primary, theme.colors.primaryDark]}
+                  style={styles.successIcon}
+                >
+                  <Ionicons name=\"checkmark\" size={36} color=\"#fff\" />
+                </LinearGradient>
+                <Text style={styles.modalTitle}>Order confirmed</Text>
+                <Text style={styles.modalSub}>Your food is being prepared with care.</Text>
+                <Text style={styles.orderId}>Order #{success.slice(-6).toUpperCase()}</Text>
+                <TouchableOpacity style={styles.primaryBtn} onPress={closeCheckout} testID=\"close-success-btn\">
+                  <Text style={styles.primaryBtnText}>Done</Text>
+                </TouchableOpacity>
+              </View>
+            ) : processing ? (
+              <View style={{ alignItems: \"center\", paddingVertical: 40 }}>
+                <ActivityIndicator color={theme.colors.primary} size=\"large\" />
+                <Text style={styles.modalTitle}>Preparing your order…</Text>
+                <Text style={styles.modalSub}>Processing mock payment.</Text>
+              </View>
+            ) : (
+              <>
+                <Text style={styles.modalTitle}>Confirm your order</Text>
+                <Text style={styles.modalSub}>
+                  {user ? `Paying as ${user.name}` : \"Sign in with Google to complete your order\"}
+                </Text>
+                <View style={styles.paymentCard}>
+                  <View style={styles.paymentRow}>
+                    <Ionicons name=\"card\" size={22} color={theme.colors.primary} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.paymentLabel}>Mock Card</Text>
+                      <Text style={styles.paymentNumber}>•••• •••• •••• 4242</Text>
+                    </View>
+                    <Text style={styles.paymentAmount}>${(total * 1.1).toFixed(2)}</Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  onPress={handleCheckout}
+                  style={[styles.primaryBtn, { marginTop: 20 }]}
+                  testID=\"confirm-pay-btn\"
+                >
+                  <Text style={styles.primaryBtnText}>{user ? \"Pay Now\" : \"Sign in to Pay\"}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={closeCheckout} style={{ marginTop: 12 }}>
+                  <Text style={styles.cancelText}>Cancel</Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        </View>
+      </Modal>
+    </View>
+  );
+}
+
+function SummaryRow({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
+  return (
+    <View style={styles.summaryRow}>
+      <Text style={[styles.summaryLabel, bold && { color: theme.colors.text, fontFamily: \"Outfit_700Bold\" }]}>
+        {label}
+      </Text>
+      <Text style={[styles.summaryValue, bold && { fontSize: 22, color: theme.colors.primary }]}>{value}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: theme.colors.bg, paddingTop: Platform.OS === \"ios\" ? 60 : 40 },
+  header: { paddingHorizontal: 24, paddingBottom: 16 },
+  overline: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 11,
+    letterSpacing: 3,
+    color: theme.colors.primary,
+    marginBottom: 8,
+  },
+  title: { fontFamily: \"Outfit_700Bold\", fontSize: 40, color: theme.colors.text, letterSpacing: -1.5 },
+  empty: { flex: 1, alignItems: \"center\", justifyContent: \"center\", padding: 40 },
+  emptyIcon: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    alignItems: \"center\",
+    justifyContent: \"center\",
+    marginBottom: 20,
+  },
+  emptyTitle: { fontFamily: \"Outfit_600SemiBold\", fontSize: 22, color: theme.colors.text },
+  emptySub: { fontFamily: \"Manrope_400Regular\", fontSize: 14, color: theme.colors.textSecondary, marginTop: 6, marginBottom: 24 },
+  list: { paddingHorizontal: 24, paddingBottom: 200, gap: 12 },
+  row: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 20,
+    padding: 12,
+  },
+  rowImg: { width: 64, height: 64, borderRadius: 16 },
+  rowName: { fontFamily: \"Outfit_600SemiBold\", color: theme.colors.text, fontSize: 15 },
+  rowPrice: { fontFamily: \"Outfit_700Bold\", color: theme.colors.primary, fontSize: 15, marginTop: 4 },
+  qtyBox: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 8,
+    backgroundColor: theme.colors.bg,
+    borderRadius: 9999,
+    paddingHorizontal: 6,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  qtyBtn: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: \"center\",
+    justifyContent: \"center\",
+  },
+  qtyText: { fontFamily: \"Outfit_700Bold\", fontSize: 14, color: theme.colors.text, minWidth: 16, textAlign: \"center\" },
+  summary: { marginTop: 12, padding: 20, borderRadius: 20, backgroundColor: theme.colors.bgPaper, borderWidth: 1, borderColor: theme.colors.border, gap: 10 },
+  summaryRow: { flexDirection: \"row\", justifyContent: \"space-between\", alignItems: \"center\" },
+  summaryLabel: { fontFamily: \"Manrope_500Medium\", fontSize: 14, color: theme.colors.textSecondary },
+  summaryValue: { fontFamily: \"Outfit_600SemiBold\", fontSize: 14, color: theme.colors.text },
+  divider: { height: 1, backgroundColor: theme.colors.border, marginVertical: 6 },
+  footer: {
+    position: \"absolute\",
+    bottom: 100,
+    left: 16,
+    right: 16,
+    backgroundColor: theme.colors.bgPaper,
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    padding: 14,
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    justifyContent: \"space-between\",
+  },
+  footerLabel: { fontFamily: \"Manrope_500Medium\", fontSize: 11, color: theme.colors.textSecondary, letterSpacing: 1, textTransform: \"uppercase\" },
+  footerTotal: { fontFamily: \"Outfit_700Bold\", fontSize: 22, color: theme.colors.text },
+  checkoutBtn: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 8,
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 14,
+    paddingHorizontal: 22,
+    borderRadius: 9999,
+  },
+  checkoutBtnText: { fontFamily: \"Outfit_700Bold\", color: \"#fff\", fontSize: 14 },
+  primaryBtn: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 14,
+    paddingHorizontal: 28,
+    borderRadius: 9999,
+    alignItems: \"center\",
+    alignSelf: \"stretch\",
+  },
+  primaryBtnText: { fontFamily: \"Outfit_700Bold\", color: \"#fff\", fontSize: 14 },
+  modalBg: { flex: 1, backgroundColor: \"rgba(0,0,0,0.6)\", justifyContent: \"flex-end\" },
+  modalSheet: {
+    backgroundColor: theme.colors.bgPaper,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    padding: 24,
+    paddingBottom: 40,
+    borderTopWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  modalHandle: { alignSelf: \"center\", width: 40, height: 4, borderRadius: 2, backgroundColor: theme.colors.border, marginBottom: 20 },
+  modalTitle: { fontFamily: \"Outfit_700Bold\", fontSize: 24, color: theme.colors.text, marginTop: 12, textAlign: \"center\" },
+  modalSub: { fontFamily: \"Manrope_400Regular\", fontSize: 14, color: theme.colors.textSecondary, marginTop: 6, marginBottom: 16, textAlign: \"center\" },
+  paymentCard: {
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 20,
+    padding: 18,
+    backgroundColor: theme.colors.bg,
+  },
+  paymentRow: { flexDirection: \"row\", alignItems: \"center\", gap: 14 },
+  paymentLabel: { fontFamily: \"Outfit_600SemiBold\", fontSize: 14, color: theme.colors.text },
+  paymentNumber: { fontFamily: \"Manrope_500Medium\", fontSize: 12, color: theme.colors.textSecondary, marginTop: 2 },
+  paymentAmount: { fontFamily: \"Outfit_700Bold\", fontSize: 18, color: theme.colors.primary },
+  cancelText: { fontFamily: \"Outfit_600SemiBold\", color: theme.colors.textSecondary, textAlign: \"center\", fontSize: 13 },
+  successIcon: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: \"center\",
+    justifyContent: \"center\",
+    marginBottom: 6,
+  },
+  orderId: { fontFamily: \"Outfit_600SemiBold\", fontSize: 14, color: theme.colors.textSecondary, letterSpacing: 2, marginBottom: 20 },
+});
+"
+Observation: Create successful: /app/frontend/app/(tabs)/cart.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+Action: file_editor create /app/frontend/app/(tabs)/bookings.tsx --file-text "/**
+ * Bookings — create new reservation + view list. Requires auth.
+ */
+import React, { useEffect, useState } from \"react\";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform, TextInput, KeyboardAvoidingView, Alert } from \"react-native\";
+import { Ionicons } from \"@expo/vector-icons\";
+import { LinearGradient } from \"expo-linear-gradient\";
+import Animated, { FadeInDown } from \"react-native-reanimated\";
+import { theme } from \"../../src/theme\";
+import { useAuth, getAuthHeaders } from \"../../src/auth\";
+
+const TIMES = [\"18:00\", \"18:30\", \"19:00\", \"19:30\", \"20:00\", \"20:30\", \"21:00\", \"21:30\"];
+const PEOPLE = [2, 3, 4, 5, 6, 8];
+
+// Next 7 days
+function getDateOptions() {
+  const days = [];
+  const today = new Date();
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    days.push({
+      iso: d.toISOString().slice(0, 10),
+      day: d.toLocaleDateString(\"en-US\", { weekday: \"short\" }).toUpperCase(),
+      date: d.getDate(),
+      month: d.toLocaleDateString(\"en-US\", { month: \"short\" }).toUpperCase(),
+    });
+  }
+  return days;
+}
+
+export default function Bookings() {
+  const { user, loginWithGoogle } = useAuth();
+  const [dates] = useState(getDateOptions());
+  const [date, setDate] = useState(dates[0].iso);
+  const [time, setTime] = useState(TIMES[2]);
+  const [people, setPeople] = useState(2);
+  const [notes, setNotes] = useState(\"\");
+  const [availability, setAvailability] = useState<{ available_tables: number; total_tables: number } | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [bookings, setBookings] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/bookings/availability?date=${date}&time=${time}`)
+      .then((r) => r.json())
+      .then(setAvailability)
+      .catch(() => {});
+  }, [date, time]);
+
+  const fetchMyBookings = React.useCallback(async () => {
+    if (!user) return;
+    try {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/bookings`, {
+        credentials: \"include\",
+        headers: getAuthHeaders(),
+      });
+      if (res.ok) setBookings(await res.json());
+    } catch {}
+  }, [user]);
+
+  useEffect(() => {
+    fetchMyBookings();
+  }, [fetchMyBookings]);
+
+  const submit = async () => {
+    if (!user) {
+      loginWithGoogle();
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/bookings`, {
+        method: \"POST\",
+        headers: { \"Content-Type\": \"application/json\", ...getAuthHeaders() },
+        credentials: \"include\",
+        body: JSON.stringify({ date, time, people, notes }),
+      });
+      if (res.ok) {
+        Alert.alert(\"Reserved\", \"Your table is confirmed.\");
+        setNotes(\"\");
+        fetchMyBookings();
+      } else {
+        Alert.alert(\"Error\", \"Could not book table.\");
+      }
+    } catch {
+      Alert.alert(\"Error\", \"Network error.\");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === \"ios\" ? \"padding\" : undefined}>
+      <ScrollView style={styles.root} contentContainerStyle={{ paddingBottom: 180 }} testID=\"bookings-screen\">
+        <View style={styles.header}>
+          <Text style={styles.overline}>RESERVATIONS</Text>
+          <Text style={styles.title}>Book a Table</Text>
+          <Text style={styles.subtitle}>Secure your seat at the tasting kitchen.</Text>
+        </View>
+
+        {/* DATE */}
+        <Text style={styles.sectionLabel}>Select Date</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rowScroll}>
+          {dates.map((d) => {
+            const active = d.iso === date;
+            return (
+              <TouchableOpacity
+                key={d.iso}
+                onPress={() => setDate(d.iso)}
+                style={[styles.dateCard, active && styles.dateCardActive]}
+                testID={`date-${d.iso}`}
+              >
+                <Text style={[styles.dateDay, active && styles.activeText]}>{d.day}</Text>
+                <Text style={[styles.dateNum, active && styles.activeText]}>{d.date}</Text>
+                <Text style={[styles.dateMonth, active && styles.activeText]}>{d.month}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+
+        {/* TIME */}
+        <Text style={styles.sectionLabel}>Select Time</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rowScroll}>
+          {TIMES.map((t) => {
+            const active = t === time;
+            return (
+              <TouchableOpacity
+                key={t}
+                onPress={() => setTime(t)}
+                style={[styles.timeChip, active && styles.timeChipActive]}
+                testID={`time-${t}`}
+              >
+                <Text style={[styles.timeChipText, active && { color: \"#fff\" }]}>{t}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+
+        {/* PEOPLE */}
+        <Text style={styles.sectionLabel}>Party Size</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rowScroll}>
+          {PEOPLE.map((p) => {
+            const active = p === people;
+            return (
+              <TouchableOpacity
+                key={p}
+                onPress={() => setPeople(p)}
+                style={[styles.peopleChip, active && styles.timeChipActive]}
+                testID={`people-${p}`}
+              >
+                <Ionicons name=\"person\" size={14} color={active ? \"#fff\" : theme.colors.textSecondary} />
+                <Text style={[styles.timeChipText, active && { color: \"#fff\" }]}>{p}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+
+        {/* AVAILABILITY */}
+        {availability && (
+          <View style={styles.availBox}>
+            <View style={styles.availDot} />
+            <Text style={styles.availText}>
+              <Text style={{ color: theme.colors.text, fontFamily: \"Outfit_600SemiBold\" }}>
+                {availability.available_tables}
+              </Text>{\" \"}
+              of {availability.total_tables} tables available
+            </Text>
+          </View>
+        )}
+
+        {/* NOTES */}
+        <Text style={styles.sectionLabel}>Special Requests</Text>
+        <TextInput
+          value={notes}
+          onChangeText={setNotes}
+          placeholder=\"Window seat, allergies, occasion...\"
+          placeholderTextColor={theme.colors.textDisabled}
+          style={styles.notes}
+          multiline
+          testID=\"notes-input\"
+        />
+
+        {/* SUBMIT */}
+        <TouchableOpacity
+          onPress={submit}
+          disabled={submitting}
+          style={styles.submitBtn}
+          testID=\"book-submit-btn\"
+        >
+          <LinearGradient
+            colors={[theme.colors.primary, theme.colors.primaryDark]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={StyleSheet.absoluteFill}
+          />
+          <Text style={styles.submitText}>
+            {user ? (submitting ? \"Reserving...\" : \"Confirm Reservation\") : \"Sign in to Reserve\"}
+          </Text>
+          <Ionicons name=\"arrow-forward\" size={18} color=\"#fff\" />
+        </TouchableOpacity>
+
+        {/* MY BOOKINGS */}
+        {user && bookings.length > 0 && (
+          <>
+            <View style={{ marginTop: 48 }}>
+              <Text style={styles.overline}>UPCOMING</Text>
+              <Text style={styles.sectionTitle}>Your reservations</Text>
+            </View>
+            <View style={{ paddingHorizontal: 24, gap: 12, marginTop: 16 }}>
+              {bookings.map((b, i) => (
+                <Animated.View key={b.booking_id} entering={FadeInDown.delay(i * 80)} style={styles.bookingCard}>
+                  <View style={styles.bookingLeft}>
+                    <Text style={styles.bookingDate}>
+                      {new Date(b.date).toLocaleDateString(\"en-US\", {
+                        weekday: \"short\",
+                        month: \"short\",
+                        day: \"numeric\",
+                      })}
+                    </Text>
+                    <Text style={styles.bookingTime}>{b.time}</Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.bookingPeople}>{b.people} guests</Text>
+                    <Text style={styles.bookingStatus}>{b.status.toUpperCase()}</Text>
+                    {!!b.notes && (
+                      <Text style={styles.bookingNotes} numberOfLines={1}>
+                        {b.notes}
+                      </Text>
+                    )}
+                  </View>
+                </Animated.View>
+              ))}
+            </View>
+          </>
+        )}
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: theme.colors.bg, paddingTop: Platform.OS === \"ios\" ? 60 : 40 },
+  header: { paddingHorizontal: 24, paddingBottom: 16 },
+  overline: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 11,
+    letterSpacing: 3,
+    color: theme.colors.primary,
+    marginBottom: 8,
+  },
+  title: { fontFamily: \"Outfit_700Bold\", fontSize: 40, color: theme.colors.text, letterSpacing: -1.5 },
+  subtitle: { fontFamily: \"Manrope_400Regular\", fontSize: 14, color: theme.colors.textSecondary, marginTop: 6 },
+  sectionLabel: {
+    fontFamily: \"Outfit_600SemiBold\",
+    fontSize: 13,
+    color: theme.colors.text,
+    letterSpacing: 1,
+    textTransform: \"uppercase\",
+    marginLeft: 24,
+    marginTop: 24,
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 28,
+    color: theme.colors.text,
+    letterSpacing: -1,
+    marginTop: 6,
+    marginLeft: 24,
+  },
+  rowScroll: { gap: 12, paddingHorizontal: 24 },
+  dateCard: {
+    width: 68,
+    paddingVertical: 16,
+    alignItems: \"center\",
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 20,
+  },
+  dateCardActive: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+  dateDay: { fontFamily: \"Outfit_700Bold\", fontSize: 10, letterSpacing: 1.5, color: theme.colors.textSecondary },
+  dateNum: { fontFamily: \"Outfit_700Bold\", fontSize: 24, color: theme.colors.text, marginVertical: 2 },
+  dateMonth: { fontFamily: \"Outfit_600SemiBold\", fontSize: 10, letterSpacing: 1, color: theme.colors.textSecondary },
+  activeText: { color: \"#fff\" },
+  timeChip: {
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 9999,
+  },
+  timeChipActive: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+  timeChipText: { fontFamily: \"Outfit_600SemiBold\", fontSize: 13, color: theme.colors.text },
+  peopleChip: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 6,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 9999,
+  },
+  availBox: {
+    marginHorizontal: 24,
+    marginTop: 24,
+    padding: 14,
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 10,
+    borderRadius: 16,
+    backgroundColor: \"rgba(255, 184, 0, 0.08)\",
+    borderWidth: 1,
+    borderColor: \"rgba(255, 184, 0, 0.25)\",
+  },
+  availDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: theme.colors.gold },
+  availText: { fontFamily: \"Manrope_500Medium\", fontSize: 13, color: theme.colors.textSecondary },
+  notes: {
+    marginHorizontal: 24,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: 20,
+    padding: 16,
+    minHeight: 90,
+    color: theme.colors.text,
+    fontFamily: \"Manrope_400Regular\",
+    fontSize: 14,
+    textAlignVertical: \"top\",
+  },
+  submitBtn: {
+    marginHorizontal: 24,
+    marginTop: 24,
+    borderRadius: 9999,
+    overflow: \"hidden\",
+    paddingVertical: 18,
+    alignItems: \"center\",
+    flexDirection: \"row\",
+    justifyContent: \"center\",
+    gap: 10,
+  },
+  submitText: { fontFamily: \"Outfit_700Bold\", color: \"#fff\", fontSize: 15, letterSpacing: 0.3 },
+  bookingCard: {
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    gap: 16,
+    padding: 16,
+    borderRadius: 20,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  bookingLeft: {
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 14,
+    backgroundColor: theme.colors.bg,
+    alignItems: \"center\",
+    borderWidth: 1,
+    borderColor: theme.colors.borderHighlight,
+  },
+  bookingDate: { fontFamily: \"Outfit_600SemiBold\", fontSize: 12, color: theme.colors.textSecondary, letterSpacing: 0.5 },
+  bookingTime: { fontFamily: \"Outfit_700Bold\", fontSize: 18, color: theme.colors.primary, marginTop: 2 },
+  bookingPeople: { fontFamily: \"Outfit_600SemiBold\", fontSize: 16, color: theme.colors.text },
+  bookingStatus: { fontFamily: \"Outfit_700Bold\", fontSize: 10, letterSpacing: 1.5, color: theme.colors.gold, marginTop: 4 },
+  bookingNotes: { fontFamily: \"Manrope_400Regular\", fontSize: 12, color: theme.colors.textSecondary, marginTop: 4 },
+});
+"
+Observation: Create successful: /app/frontend/app/(tabs)/bookings.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+
+
+
+
+Action: file_editor create /app/frontend/app/(tabs)/profile.tsx --file-text "/**
+ * Profile — Google sign-in, user dashboard (orders + bookings history).
+ */
+import React, { useCallback, useEffect, useState } from \"react\";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform, Image, ActivityIndicator } from \"react-native\";
+import { Ionicons } from \"@expo/vector-icons\";
+import { LinearGradient } from \"expo-linear-gradient\";
+import { theme } from \"../../src/theme\";
+import { useAuth, getAuthHeaders } from \"../../src/auth\";
+
+export default function Profile() {
+  const { user, loading, loginWithGoogle, logout } = useAuth();
+  const [orders, setOrders] = useState<any[]>([]);
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [tab, setTab] = useState<\"orders\" | \"bookings\">(\"orders\");
+
+  const loadData = useCallback(async () => {
+    if (!user) return;
+    const headers = { credentials: \"include\" as RequestCredentials, headers: getAuthHeaders() };
+    try {
+      const [ordersRes, bookingsRes] = await Promise.all([
+        fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/orders`, { credentials: \"include\", headers: getAuthHeaders() }),
+        fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/bookings`, { credentials: \"include\", headers: getAuthHeaders() }),
+      ]);
+      if (ordersRes.ok) setOrders(await ordersRes.json());
+      if (bookingsRes.ok) setBookings(await bookingsRes.json());
+    } catch {}
+  }, [user]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator color={theme.colors.primary} />
+      </View>
+    );
+  }
+
+  if (!user) {
+    return (
+      <View style={styles.loginRoot} testID=\"profile-login\">
+        <View style={styles.loginCard}>
+          <LinearGradient
+            colors={[\"rgba(255, 77, 0, 0.12)\", \"rgba(11, 8, 8, 0)\"]}
+            style={StyleSheet.absoluteFill}
+          />
+          <View style={styles.iconCircle}>
+            <Ionicons name=\"sparkles\" size={28} color={theme.colors.primary} />
+          </View>
+          <Text style={styles.loginTitle}>Join the table</Text>
+          <Text style={styles.loginSub}>
+            Sign in to save bookings, track orders, and unlock tasting invitations.
+          </Text>
+
+          <TouchableOpacity
+            style={styles.googleBtn}
+            onPress={loginWithGoogle}
+            testID=\"google-login-btn\"
+          >
+            <Ionicons name=\"logo-google\" size={18} color={theme.colors.text} />
+            <Text style={styles.googleBtnText}>Continue with Google</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.loginDisclaimer}>
+            Secure sign-in via Emergent Auth. No passwords stored.
+          </Text>
+        </View>
+      </View>
+    );
+  }
+
+  return (
+    <ScrollView style={styles.root} contentContainerStyle={{ paddingBottom: 180 }} testID=\"profile-screen\">
+      <View style={styles.profileHead}>
+        <LinearGradient
+          colors={[theme.colors.primaryDark, \"#1a0d06\", theme.colors.bg]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          style={styles.profileBg}
+        />
+        <View style={{ alignItems: \"center\" }}>
+          {user.picture ? (
+            <Image source={{ uri: user.picture }} style={styles.avatarLg} />
+          ) : (
+            <View style={[styles.avatarLg, styles.avatarFallback]}>
+              <Text style={styles.avatarInitial}>{user.name[0]}</Text>
+            </View>
+          )}
+          <Text style={styles.userName}>{user.name}</Text>
+          <Text style={styles.userEmail}>{user.email}</Text>
+          <View style={styles.statsRow}>
+            <View style={styles.statPill}>
+              <Text style={styles.statPillNum}>{orders.length}</Text>
+              <Text style={styles.statPillLabel}>Orders</Text>
+            </View>
+            <View style={styles.statPill}>
+              <Text style={styles.statPillNum}>{bookings.length}</Text>
+              <Text style={styles.statPillLabel}>Bookings</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      {/* Tabs */}
+      <View style={styles.tabs}>
+        <TouchableOpacity
+          onPress={() => setTab(\"orders\")}
+          style={[styles.tabBtn, tab === \"orders\" && styles.tabBtnActive]}
+          testID=\"tab-orders\"
+        >
+          <Text style={[styles.tabText, tab === \"orders\" && styles.tabTextActive]}>Orders</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setTab(\"bookings\")}
+          style={[styles.tabBtn, tab === \"bookings\" && styles.tabBtnActive]}
+          testID=\"tab-bookings\"
+        >
+          <Text style={[styles.tabText, tab === \"bookings\" && styles.tabTextActive]}>Bookings</Text>
+        </TouchableOpacity>
+      </View>
+
+      {tab === \"orders\" && (
+        <View style={{ paddingHorizontal: 24, gap: 12 }}>
+          {orders.length === 0 ? (
+            <Text style={styles.emptyMsg}>No orders yet. Your next feast awaits.</Text>
+          ) : (
+            orders.map((o) => (
+              <View key={o.order_id} style={styles.orderCard}>
+                <View style={styles.orderHead}>
+                  <Text style={styles.orderId}>#{o.order_id.slice(-6).toUpperCase()}</Text>
+                  <Text style={styles.orderStatus}>{o.status.toUpperCase()}</Text>
+                </View>
+                {o.items.map((it: any) => (
+                  <View key={it.item_id} style={styles.orderItem}>
+                    <Image source={{ uri: it.image }} style={styles.orderItemImg} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.orderItemName} numberOfLines={1}>
+                        {it.name}
+                      </Text>
+                      <Text style={styles.orderItemMeta}>
+                        Qty {it.quantity} · ${it.price.toFixed(2)}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+                <View style={styles.orderTotalRow}>
+                  <Text style={styles.orderTotalLabel}>Total</Text>
+                  <Text style={styles.orderTotal}>${o.total.toFixed(2)}</Text>
+                </View>
+              </View>
+            ))
+          )}
+        </View>
+      )}
+
+      {tab === \"bookings\" && (
+        <View style={{ paddingHorizontal: 24, gap: 12 }}>
+          {bookings.length === 0 ? (
+            <Text style={styles.emptyMsg}>No reservations yet. Book your table.</Text>
+          ) : (
+            bookings.map((b) => (
+              <View key={b.booking_id} style={styles.bookingCard}>
+                <View style={styles.bookingLeft}>
+                  <Text style={styles.bookingDateTxt}>
+                    {new Date(b.date).toLocaleDateString(\"en-US\", {
+                      weekday: \"short\",
+                      month: \"short\",
+                      day: \"numeric\",
+                    })}
+                  </Text>
+                  <Text style={styles.bookingTimeTxt}>{b.time}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.bookingPeopleTxt}>{b.people} guests</Text>
+                  <Text style={styles.bookingStatusTxt}>{b.status.toUpperCase()}</Text>
+                </View>
+              </View>
+            ))
+          )}
+        </View>
+      )}
+
+      {/* Logout */}
+      <TouchableOpacity style={styles.logoutBtn} onPress={logout} testID=\"logout-btn\">
+        <Ionicons name=\"log-out-outline\" size={18} color={theme.colors.text} />
+        <Text style={styles.logoutText}>Sign out</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: theme.colors.bg },
+  center: { flex: 1, alignItems: \"center\", justifyContent: \"center\", backgroundColor: theme.colors.bg },
+  loginRoot: { flex: 1, backgroundColor: theme.colors.bg, alignItems: \"center\", justifyContent: \"center\", padding: 24 },
+  loginCard: {
+    width: \"100%\",
+    maxWidth: 420,
+    padding: 32,
+    borderRadius: 32,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    overflow: \"hidden\",
+    alignItems: \"center\",
+  },
+  iconCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: \"rgba(255,77,0,0.1)\",
+    alignItems: \"center\",
+    justifyContent: \"center\",
+    borderWidth: 1,
+    borderColor: theme.colors.borderHighlight,
+  },
+  loginTitle: {
+    fontFamily: \"Outfit_700Bold\",
+    fontSize: 28,
+    color: theme.colors.text,
+    letterSpacing: -0.8,
+    marginTop: 20,
+  },
+  loginSub: {
+    fontFamily: \"Manrope_400Regular\",
+    fontSize: 14,
+    color: theme.colors.textSecondary,
+    textAlign: \"center\",
+    marginTop: 8,
+    marginBottom: 28,
+    lineHeight: 20,
+  },
+  googleBtn: {
+    width: \"100%\",
+    flexDirection: \"row\",
+    alignItems: \"center\",
+    justifyContent: \"center\",
+    gap: 10,
+    paddingVertical: 16,
+    borderRadius: 9999,
+    backgroundColor: \"#fff\",
+  },
+  googleBtnText: { fontFamily: \"Outfit_700Bold\", fontSize: 14, color: \"#000\" },
+  loginDisclaimer: {
+    fontFamily: \"Manrope_400Regular\",
+    fontSize: 11,
+    color: theme.colors.textDisabled,
+    marginTop: 16,
+    textAlign: \"center\",
+  },
+  profileHead: {
+    paddingTop: Platform.OS === \"ios\" ? 80 : 56,
+    paddingBottom: 32,
+    alignItems: \"center\",
+    overflow: \"hidden\",
+  },
+  profileBg: { ...StyleSheet.absoluteFillObject },
+  avatarLg: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    borderWidth: 2,
+    borderColor: theme.colors.primary,
+  },
+  avatarFallback: { backgroundColor: theme.colors.bgPaper, alignItems: \"center\", justifyContent: \"center\" },
+  avatarInitial: { fontFamily: \"Outfit_700Bold\", fontSize: 36, color: theme.colors.text },
+  userName: { fontFamily: \"Outfit_700Bold\", fontSize: 24, color: theme.colors.text, marginTop: 14 },
+  userEmail: { fontFamily: \"Manrope_400Regular\", fontSize: 13, color: theme.colors.textSecondary, marginTop: 4 },
+  statsRow: { flexDirection: \"row\", gap: 12, marginTop: 24 },
+  statPill: {
+    paddingHorizontal: 22,
+    paddingVertical: 12,
+    borderRadius: 9999,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    alignItems: \"center\",
+    minWidth: 90,
+  },
+  statPillNum: { fontFamily: \"Outfit_700Bold\", fontSize: 18, color: theme.colors.primary },
+  statPillLabel: {
+    fontFamily: \"Outfit_600SemiBold\",
+    fontSize: 10,
+    color: theme.colors.textSecondary,
+    letterSpacing: 1,
+    marginTop: 2,
+  },
+  tabs: {
+    flexDirection: \"row\",
+    marginHorizontal: 24,
+    marginBottom: 20,
+    backgroundColor: theme.colors.bgPaper,
+    borderRadius: 9999,
+    padding: 4,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  tabBtn: { flex: 1, paddingVertical: 10, alignItems: \"center\", borderRadius: 9999 },
+  tabBtnActive: { backgroundColor: theme.colors.primary },
+  tabText: { fontFamily: \"Outfit_600SemiBold\", fontSize: 13, color: theme.colors.textSecondary },
+  tabTextActive: { color: \"#fff\" },
+  emptyMsg: { fontFamily: \"Manrope_400Regular\", fontSize: 14, color: theme.colors.textSecondary, textAlign: \"center\", paddingVertical: 40 },
+  orderCard: { padding: 16, borderRadius: 20, backgroundColor: theme.colors.bgPaper, borderWidth: 1, borderColor: theme.colors.border },
+  orderHead: { flexDirection: \"row\", justifyContent: \"space-between\", marginBottom: 12 },
+  orderId: { fontFamily: \"Outfit_700Bold\", fontSize: 13, color: theme.colors.textSecondary, letterSpacing: 2 },
+  orderStatus: { fontFamily: \"Outfit_700Bold\", fontSize: 10, color: theme.colors.gold, letterSpacing: 1.5 },
+  orderItem: { flexDirection: \"row\", alignItems: \"center\", gap: 10, marginBottom: 8 },
+  orderItemImg: { width: 40, height: 40, borderRadius: 10 },
+  orderItemName: { fontFamily: \"Outfit_600SemiBold\", fontSize: 14, color: theme.colors.text },
+  orderItemMeta: { fontFamily: \"Manrope_400Regular\", fontSize: 12, color: theme.colors.textSecondary, marginTop: 2 },
+  orderTotalRow: {
+    flexDirection: \"row\",
+    justifyContent: \"space-between\",
+    alignItems: \"center\",
+    paddingTop: 12,
+    marginTop: 8,
+    borderTopWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  orderTotalLabel: { fontFamily: \"Outfit_600SemiBold\", fontSize: 12, color: theme.colors.textSecondary, letterSpacing: 1, textTransform: \"uppercase\" },
+  orderTotal: { fontFamily: \"Outfit_700Bold\", fontSize: 20, color: theme.colors.primary },
+  bookingCard: { flexDirection: \"row\", alignItems: \"center\", gap: 16, padding: 16, borderRadius: 20, backgroundColor: theme.colors.bgPaper, borderWidth: 1, borderColor: theme.colors.border },
+  bookingLeft: { paddingVertical: 8, paddingHorizontal: 14, borderRadius: 14, backgroundColor: theme.colors.bg, alignItems: \"center\", borderWidth: 1, borderColor: theme.colors.borderHighlight },
+  bookingDateTxt: { fontFamily: \"Outfit_600SemiBold\", fontSize: 12, color: theme.colors.textSecondary, letterSpacing: 0.5 },
+  bookingTimeTxt: { fontFamily: \"Outfit_700Bold\", fontSize: 18, color: theme.colors.primary, marginTop: 2 },
+  bookingPeopleTxt: { fontFamily: \"Outfit_600SemiBold\", fontSize: 16, color: theme.colors.text },
+  bookingStatusTxt: { fontFamily: \"Outfit_700Bold\", fontSize: 10, letterSpacing: 1.5, color: theme.colors.gold, marginTop: 4 },
+  logoutBtn: {
+    marginHorizontal: 24,
+    marginTop: 32,
+    paddingVertical: 14,
+    borderRadius: 9999,
+    backgroundColor: theme.colors.bgPaper,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    flexDirection: \"row\",
+    justifyContent: \"center\",
+    alignItems: \"center\",
+    gap: 10,
+  },
+  logoutText: { fontFamily: \"Outfit_600SemiBold\", fontSize: 14, color: theme.colors.text },
+});
+"
+Observation: Create successful: /app/frontend/app/(tabs)/profile.tsx
+
+Fetching debug logs for expo
+
+==> /var/log/supervisor/expo.err.log <==
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linear-gradient@55.0.13 - expected version: ~15.0.8
+Your project may not work correctly until you install the expected versions of the packages.
+
+==> /var/log/supervisor/expo.out.log <==
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+
+
+Fetching debug logs for backend
+
+==> /var/log/supervisor/backend.err.log <==
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [222]
+INFO:     Stopping reloader process [185]
+INFO:     Will watch for changes in these directories: ['/app/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [2433] using WatchFiles
+INFO:     Started server process [2469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2469]
+INFO:     Started server process [8826]
+INFO:     Waiting for application startup.
+INFO:server:Seeded 10 menu items
+INFO:server:Seeded 3 reviews
+INFO:     Application startup complete.
+
+==> /var/log/supervisor/backend.out.log <==
+
+
+Fetching debug logs for mongodb
+
+tail: cannot open '/var/log/supervisor/mongodb*.log' for reading: No such file or directory
+
+
+
+
+
+
+Now let me restart expo and test backend endpoints + screenshot:
+Action: $ sudo supervisorctl restart expo && sleep 5 && curl -s http://localhost:8001/api/menu | head -c 400 && echo && curl -s http://localhost:8001/api/reviews | head -c 200
+Observation: expo: stopped
+expo: started
+[{"item_id":"m_pizza_01","name":"Truffle Margherita","description":"Wood-fired sourdough, buffalo mozzarella, truffle oil, fresh basil.","price":18.5,"rating":4.8,"category":"veg","image":"https://images.pexels.com/photos/35017345/pexels-photo-35017345.jpeg","tags":["signature","wood-fired"]},{"item_id":"m_burger_01","name":"Ember Wagyu Burger","description":"Smoked wagyu, aged cheddar, charred on
+[{"review_id":"rev_seed_01","name":"Amelia Rivera","rating":5,"comment":"Every bite feels like a curated memory. The truffle margherita is poetry.","avatar":"https://i.pravatar.cc/150?img=48","created
+Exit code: 0
+
+
+
+
+
+
+Action: $ sleep 15 && tail -30 /var/log/supervisor/expo.out.log
+Observation: env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Exit code: 0
+
+
+
+
+
+
+
+
+
+
+
+Action: $ sleep 20 && tail -10 /var/log/supervisor/expo.out.log /var/log/supervisor/expo.err.log
+Observation: [stderr] tail: option used in invalid context -- 1
+Exit code: 1
+
+
+
+
+
+
+Action: $ sleep 20 && tail -n 15 /var/log/supervisor/expo.out.log && echo "---ERR---" && tail -n 15 /var/log/supervisor/expo.err.log
+Observation: Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+yarn run v1.22.22
+$ /app/frontend/node_modules/.bin/expo start --tunnel --port 3000
+env: load .env
+env: export EXPO_TUNNEL_SUBDOMAIN EXPO_PACKAGER_HOSTNAME EXPO_PUBLIC_BACKEND_URL EXPO_USE_FAST_RESOLVER METRO_CACHE_ROOT
+Starting project at /app/frontend
+Fast resolver is enabled.
+Metro is running in CI mode, reloads are disabled. Remove CI=true to enable watch mode.
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+Waiting on http://localhost:3000
+Logs for your project will appear below.
+---ERR---
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+CommandError: TypeError: Cannot read properties of undefined (reading 'body')
+Check the Ngrok status page for outages: https://status.ngrok.com/
+error Command failed with exit code 1.
+Exit code: 0
+
+
+
+
+
+
+Preview is still spinning up. Let me wait longer and retry:
+Action: $ sleep 30 && curl -s -o /dev/null -w "HTTP %{http_code}\n" https://508242fb-d8a2-4dba-9b99-45530443b5a7.preview.emergentagent.com
+Observation: HTTP 200
+Exit code: 0
+
+
+
+
+
+Action: $ sleep 60 && tail -n 5 /var/log/supervisor/expo.out.log
+Observation: λ Bundled 75ms node_modules/expo-router/node/render.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web Bundled 687ms node_modules/expo-router/entry.js (1 module)
+Web Bundled 34ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Exit code: 0
+
+
+
+
+
+
+
+
+Beautiful! The hero landing looks stunning. Now let me run the testing agent:
+Action: {
+  "original_problem_statement_and_user_choices_inputs": "Build a premium Restaurant Management application as an Expo React Native mobile app. Features: Animated hero landing (pizza/coffee/burger with scroll parallax), Menu browse with category filters (Veg/Non-Veg/Drinks/Desserts), Cart + Checkout with mock payment, Table Booking (date/time/people), Emergent Google Social Login, User dashboard with orders + bookings history. Dark cinematic theme with vibrant orange/red/brown palette, glassmorphism + neumorphism UI. Backend: FastAPI + MongoDB.",
+  "features_or_bugs_to_test": [
+    "Backend /api/menu returns seeded items (10 items) and filters by category (veg, non-veg, drinks, desserts)",
+    "Backend /api/reviews returns seeded testimonials",
+    "Backend /api/bookings/availability?date=...&time=... returns available_tables/total_tables",
+    "Backend /api/auth/me returns 401 when unauthenticated, 200 with valid session_token",
+    "Backend /api/bookings POST creates booking with authenticated user",
+    "Backend /api/bookings GET returns only current user's bookings",
+    "Backend /api/orders POST creates order with authenticated user",
+    "Backend /api/orders GET returns only current user's orders",
+    "Frontend Home screen loads with animated hero (pizza/coffee/burger visible), CTAs work",
+    "Frontend Menu screen loads, shows 10 items, category filter chips filter items",
+    "Frontend Menu add-to-cart increments cart badge",
+    "Frontend Cart screen shows items, qty +/- works, checkout flow opens modal",
+    "Frontend Bookings screen shows date/time/people selectors and availability indicator",
+    "Frontend Profile screen shows Google login CTA when signed out",
+    "Bottom floating glassmorphism tab bar navigation works across all 5 tabs"
+  ],
+  "files_of_reference": [
+    "/app/backend/server.py",
+    "/app/frontend/app/_layout.tsx",
+    "/app/frontend/app/(tabs)/_layout.tsx",
+    "/app/frontend/app/(tabs)/index.tsx",
+    "/app/frontend/app/(tabs)/menu.tsx",
+    "/app/frontend/app/(tabs)/cart.tsx",
+    "/app/frontend/app/(tabs)/bookings.tsx",
+    "/app/frontend/app/(tabs)/profile.tsx",
+    "/app/frontend/src/auth.tsx",
+    "/app/frontend/src/cart.tsx",
+    "/app/auth_testing.md"
+  ],
+  "required_credentials": [],
+  "testing_type": "both",
+  "agent_to_agent_context_note": {
+    "description": "First-time testing. Backend seeds 10 menu items and 3 reviews on startup. Emergent Google OAuth is integrated via /api/auth/session (exchanges session_id for session_token, sets httpOnly cookie). For protected endpoints, use the auth_testing.md playbook to create a test session in MongoDB. Frontend preview URL: https://508242fb-d8a2-4dba-9b99-45530443b5a7.preview.emergentagent.com. Expected testIDs: home-screen, menu-screen, cart-screen, bookings-screen, profile-screen, profile-login, filter-veg/non-veg/drinks/desserts/all, menu-card-<id>, add-<id>, cart-badge, qty-plus-<id>, qty-minus-<id>, checkout-btn, confirm-pay-btn, date-<iso>, time-<t>, people-<n>, book-submit-btn, notes-input, google-login-btn, cta-book-table, cta-order-now, tab-orders, tab-bookings, logout-btn. Auth-protected flows (create booking/order) require a valid session — testing agent should mint one via MongoDB per the playbook. Mock payment flow is intentional."
+  },
+  "mocked_api": {
+    "has_mocked_apis": true,
+    "mocked_apis_list": ["Payment processing is mocked (no real Stripe) — confirm flow simulates success after ~1.5s and returns an order_id"]
+  }
+}
+Observation: Testing was started but not completed due to early termination.
+
+## Work Done
+1. Reviewed `/app/backend/server.py` (FastAPI + MongoDB, Emergent Google OAuth via `/api/auth/session`, seeds 10 menu items + 3 reviews).
+2. Read `/app/auth_testing.md` and `/app/memory/test_credentials.md` (file is empty placeholder — no preset creds, must mint sessions via Mongo per playbook).
+3. Verified env: backend uses `MONGO_URL` + `DB_NAME=test_database`; frontend exposes `EXPO_PUBLIC_BACKEND_URL=https://dine-motion-1.preview.emergentagent.com`.
+4. Confirmed via supervisor logs that backend is healthy, seed completed (`Seeded 10 menu items`, `Seeded 3 reviews`), `/api/menu` and `/api/reviews` return 200, `/api/auth/me` returns 401 unauthenticated as expected.
+5. Created `/app/backend/tests/conftest.py` with fixtures: `base_url`, `mongo_db`, `test_session` (mints user+session in Mongo per playbook with cleanup), `api_client`, `auth_client` (Bearer token).
+6. Created `/app/test_reports/` and `/app/test_reports/pytest/` directories.
+
+## Not Done (due to FINAL_INSTRUCTION)
+- Did NOT write the actual pytest test cases file (e.g., `test_api.py` covering /menu, /menu?category=, /reviews, /bookings/availability, /auth/me 401+200, POST /bookings, GET /bookings, POST /orders, GET /orders).
+- Did NOT execute pytest.
+- Did NOT run any Playwright frontend testing (home/menu/cart/bookings/profile screens, tab bar, add-to-cart, checkout modal, availability indicator, Google login CTA).
+- Did NOT create `/app/test_reports/iteration_N.json`.
+
+## Quick Code Review Findings (from server.py read)
+- `/api/auth/session` sets cookie with `samesite="none"` + `secure=True` — fine for cross-site preview but mobile webview must include credentials; frontend should use `credentials: 'include'` or send Bearer.
+- All Mongo reads use `{"_id": 0}` projection ✅.
+- `availability` endpoint hardcodes 10 tables and does not validate date/time format — minor, acceptable for MVP.
+- Seed is idempotent (count==0 guard) ✅.
+- No input validation on `BookingCreate.people` (no min/max) — could allow negative people count. Minor.
+- `/api/reviews` POST is auth-gated ✅ but not in the test list.
+
+## Action Items for Main Agent / Next Testing Agent
+1. Re-run testing agent to actually create `/app/backend/tests/test_api.py` and execute pytest using the conftest already in place.
+2. Run Playwright mobile-viewport tests against the listed testIDs.
+3. Consider adding Pydantic validators (e.g., `people: int = Field(ge=1, le=20)`).
+4. Populate `/app/memory/test_credentials.md` if any persistent test account should be reused.
+
+retest_needed: true. should_main_agent_self_test: false (needs full test suite execution).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
